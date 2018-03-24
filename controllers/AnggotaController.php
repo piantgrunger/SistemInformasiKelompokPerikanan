@@ -8,6 +8,11 @@ use app\models\AnggotaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
+use app\models\Kota;
+use app\models\Kelurahan;
+use app\models\Kecamatan;
+use yii\helpers\Url;
 
 /**
  * AnggotaController implements the CRUD actions for Anggota model.
@@ -74,6 +79,52 @@ class AnggotaController extends Controller
         }
     }
 
+    
+// THE CONTROLLER
+public function actionKota() {
+    $out = [];
+    if (isset($_POST['depdrop_parents'])) {
+        $id_propinsi = $_POST['depdrop_parents'];
+            $out = Kota::getDataBrowseKota($id_propinsi); 
+            // the getDefaultSubCat function will query the database
+            // and return the default sub cat for the cat_id
+            
+            echo Json::encode(['output'=>$out, 'selected'=>'']);
+            return;
+    }
+    echo Json::encode(['output'=>'', 'selected'=>'']);
+}
+// THE CONTROLLER
+public function actionKelurahan() {
+    $out = [];
+    if (isset($_POST['depdrop_parents'])) {
+        $id_propinsi = $_POST['depdrop_parents'];
+            $out = Kelurahan::getDataBrowseKelurahan($id_propinsi); 
+            // the getDefaultSubCat function will query the database
+            // and return the default sub cat for the cat_id
+            
+            echo Json::encode(['output'=>$out, 'selected'=>'']);
+            return;
+    }
+    echo Json::encode(['output'=>'', 'selected'=>'']);
+}
+
+
+// THE CONTROLLER
+public function actionKecamatan() {
+    $out = [];
+    if (isset($_POST['depdrop_parents'])) {
+        $id_propinsi = $_POST['depdrop_parents'];
+            $out = Kecamatan::getDataBrowseKecamatan($id_propinsi); 
+            // the getDefaultSubCat function will query the database
+            // and return the default sub cat for the cat_id
+            
+            echo Json::encode(['output'=>$out, 'selected'=>'']);
+            return;
+    }
+    echo Json::encode(['output'=>'', 'selected'=>'']);
+}
+
     /**
      * Updates an existing Anggota model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -112,7 +163,8 @@ class AnggotaController extends Controller
 	Yii::$app->session->setFlash('error', "Data Tidak Dapat Dihapus Karena Dipakai Modul Lain");
        } 
          return $this->redirect(['index']);
-    }
+    }    
+    
 
     /**
      * Finds the Anggota model based on its primary key value.
@@ -130,3 +182,4 @@ class AnggotaController extends Controller
         }
     }
 }
+

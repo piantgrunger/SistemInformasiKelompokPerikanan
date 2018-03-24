@@ -98,4 +98,38 @@ class Anggota extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
+    public function getPropinsi()
+    {
+        return $this->hasOne(Propinsi::className(), ['id_propinsi' => 'id_propinsi']);
+    }
+
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKota()
+    {
+        return $this->hasOne(Kota::className(), ['id_kota' => 'id_kota']);
+    }
+
+   
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKecamatan()
+    {
+        return $this->hasOne(Kecamatan::className(), ['id_kecamatan' => 'id_kecamatan']);
+    }
+
+   
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKelurahan()
+    {
+        return $this->hasOne(Kelurahan::className(), ['id_kelurahan' => 'id_kelurahan']);
+    }
+
+    
 }
