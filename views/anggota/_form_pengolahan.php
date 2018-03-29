@@ -37,15 +37,17 @@ use kartik\datecontrol\DateControl;
 
 <?= $form->field($model, 'stat_izin_lainnya')->checkbox(array('label'=>'Lainnya'))->label("") ?>
 
-<?= $form->field($model, 'stat_skp')->textInput() ?>
+<label >Status Sertifikasi : </label>
 
-<?= $form->field($model, 'stat_haccp')->textInput() ?>
+<?= $form->field($model, 'stat_skp')->checkbox(array('label'=>'SKP'))->label("") ?>
 
-<?= $form->field($model, 'stat_pirt')->textInput() ?>
+<?= $form->field($model, 'stat_haccp')->checkbox(array('label'=>'HACCP'))->label("") ?>
 
-<?= $form->field($model, 'stat_sni')->textInput() ?>
+<?= $form->field($model, 'stat_pirt')->checkbox(array('label'=>'PIRT'))->label("") ?>
 
-<?= $form->field($model, 'stat_sertifikat_lainnya')->textInput() ?>
+<?= $form->field($model, 'stat_sni')->checkbox(array('label'=>'SNI'))->label("") ?>
+
+<?= $form->field($model, 'stat_sertifikat_lainnya')->checkbox(array('label'=>'Lainnya'))->label("") ?>
 
 <?= $form->field($model, 'tahun_berdiri')->textInput() ?>
 
