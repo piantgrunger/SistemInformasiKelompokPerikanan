@@ -9,14 +9,14 @@ $gridColumns=[['class' => 'kartik\grid\SerialColumn'],
             'nama_anggota',
             'nik',
             'jenis_kelamin',
-            'tempat_lahir',
+            'jenis_anggota',
             // 'tgl_lahir',
             // 'golongan_darah',
-            // 'alamat:ntext',
+            'alamat:ntext',
             // 'id_propinsi',
             // 'id_kota',
-            // 'id_kecamatan',
-            // 'id_kelurahan',
+         //    'nama_kecamatan',
+           //  'nama_kelurahan',
             // 'status_pernikahan',
             // 'status_dalam_keluarga',
             // 'jml_anggota_keluarga',
@@ -41,7 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p> <?php if ((Mimin::checkRoute($this->context->id."/create"))){ ?>        <?=  Html::a(Yii::t('app', 'Anggota  Baru'), ['create'], ['class' => 'btn btn-success']) ?>
+    <p> <?php if ((Mimin::checkRoute($this->context->id."/pengolahanbaru"))){ ?> 
+           <?=  Html::a(Yii::t('app', 'Anggota Pengolahan Baru'), ['pengolahanbaru'], ['class' => 'btn btn-success']) ?>
     <?php } ?>    </p>
 
     <?= GridView::widget([

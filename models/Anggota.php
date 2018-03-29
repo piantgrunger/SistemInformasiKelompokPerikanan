@@ -10,7 +10,7 @@ use yii\db\Expression;
 
 
 /**
- * This is the model class for table "tb_m_anggota".
+ * This is the model class for table "{{%tb_m_anggota}}".
  *
  * @property int $id_anggota
  * @property string $nama_anggota
@@ -23,13 +23,40 @@ use yii\db\Expression;
  * @property int $id_propinsi
  * @property int $id_kota
  * @property int $id_kecamatan
- * @property string $id_kelurahan
+ * @property int $id_kelurahan
  * @property string $status_pernikahan
  * @property string $status_dalam_keluarga
  * @property int $jml_anggota_keluarga
  * @property string $pendidikan
  * @property string $created_at
  * @property string $updated_at
+ * @property string $status_kelompok_usaha
+ * @property string $status_usaha
+ * @property string $jabatan_dalam_usaha
+ * @property string $perlindungan_asuransi
+ * @property string $no_kontak_yang_bisa_dihubungi
+ * @property int $stat_siup
+ * @property int $stat_situ
+ * @property int $stat_tdp
+ * @property int $stat_ho
+ * @property int $stat_izin_lainnya
+ * @property int $stat_skp
+ * @property int $stat_haccp
+ * @property int $stat_pirt
+ * @property int $stat_sni
+ * @property int $stat_sertifikat_lainnya
+ * @property int $tahun_berdiri
+ * @property string $jenis_usaha
+ * @property string $jenis_bahan_baku
+ * @property string $asal_bahan_baku
+ * @property string $jumlah_bahan_baku_bulanan
+ * @property string $jumlah_produksi_bulanan
+ * @property string $kapasitas_produksi_bulanan
+ * @property string $pendapatan_bulanan
+ * @property string $nilai_aset
+ * @property string $sarana_prasarana
+ * @property int $jumlah_tenaga_kerja
+ * @property string $daerah_pemasaran
  */
 class Anggota extends \yii\db\ActiveRecord
 {
@@ -54,7 +81,7 @@ class Anggota extends \yii\db\ActiveRecord
     }
     public static function tableName()
     {
-        return 'tb_m_anggota';
+        return '{{%tb_m_anggota}}';
     }
 
     /**
@@ -64,10 +91,11 @@ class Anggota extends \yii\db\ActiveRecord
     {
         return [
             [['nama_anggota', 'nik', 'tempat_lahir', 'tgl_lahir', 'alamat', 'id_propinsi', 'id_kota', 'jml_anggota_keluarga'], 'required'],
-            [['jenis_kelamin', 'golongan_darah', 'alamat', 'status_pernikahan', 'status_dalam_keluarga', 'pendidikan'], 'string'],
+            [['jenis_kelamin', 'jenis_anggota','golongan_darah', 'alamat', 'status_pernikahan', 'status_dalam_keluarga', 'pendidikan', 'status_kelompok_usaha', 'status_usaha', 'perlindungan_asuransi', 'jenis_usaha', 'sarana_prasarana', 'daerah_pemasaran'], 'string'],
             [['tgl_lahir', 'created_at', 'updated_at'], 'safe'],
-            [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan', 'jml_anggota_keluarga'], 'integer'],
-            [['nama_anggota', 'nik', 'tempat_lahir'], 'string', 'max' => 255],
+            [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan', 'jml_anggota_keluarga', 'stat_siup', 'stat_situ', 'stat_tdp', 'stat_ho', 'stat_izin_lainnya', 'stat_skp', 'stat_haccp', 'stat_pirt', 'stat_sni', 'stat_sertifikat_lainnya', 'tahun_berdiri', 'jumlah_tenaga_kerja'], 'integer'],
+            [['jumlah_bahan_baku_bulanan', 'jumlah_produksi_bulanan', 'kapasitas_produksi_bulanan', 'pendapatan_bulanan', 'nilai_aset'], 'number'],
+            [['nama_anggota', 'nik', 'tempat_lahir', 'jabatan_dalam_usaha', 'no_kontak_yang_bisa_dihubungi', 'jenis_bahan_baku', 'asal_bahan_baku'], 'string', 'max' => 255],
             [['nik'], 'unique'],
         ];
     }
@@ -96,40 +124,63 @@ class Anggota extends \yii\db\ActiveRecord
             'pendidikan' => Yii::t('app', 'Pendidikan'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'status_kelompok_usaha' => Yii::t('app', 'Status Kelompok Usaha'),
+            'status_usaha' => Yii::t('app', 'Status Usaha'),
+            'jabatan_dalam_usaha' => Yii::t('app', 'Jabatan Dalam Usaha'),
+            'perlindungan_asuransi' => Yii::t('app', 'Perlindungan Asuransi'),
+            'no_kontak_yang_bisa_dihubungi' => Yii::t('app', 'No Kontak Yang Bisa Dihubungi'),
+            'stat_siup' => Yii::t('app', 'Stat Siup'),
+            'stat_situ' => Yii::t('app', 'Stat Situ'),
+            'stat_tdp' => Yii::t('app', 'Stat Tdp'),
+            'stat_ho' => Yii::t('app', 'Stat Ho'),
+            'stat_izin_lainnya' => Yii::t('app', 'Stat Izin Lainnya'),
+            'stat_skp' => Yii::t('app', 'Stat Skp'),
+            'stat_haccp' => Yii::t('app', 'Stat Haccp'),
+            'stat_pirt' => Yii::t('app', 'Stat Pirt'),
+            'stat_sni' => Yii::t('app', 'Stat Sni'),
+            'stat_sertifikat_lainnya' => Yii::t('app', 'Stat Sertifikat Lainnya'),
+            'tahun_berdiri' => Yii::t('app', 'Tahun Berdiri'),
+            'jenis_usaha' => Yii::t('app', 'Jenis Usaha'),
+            'jenis_bahan_baku' => Yii::t('app', 'Jenis Bahan Baku'),
+            'asal_bahan_baku' => Yii::t('app', 'Asal Bahan Baku'),
+            'jumlah_bahan_baku_bulanan' => Yii::t('app', 'Jumlah Bahan Baku Bulanan'),
+            'jumlah_produksi_bulanan' => Yii::t('app', 'Jumlah Produksi Bulanan'),
+            'kapasitas_produksi_bulanan' => Yii::t('app', 'Kapasitas Produksi Bulanan'),
+            'pendapatan_bulanan' => Yii::t('app', 'Pendapatan Bulanan'),
+            'nilai_aset' => Yii::t('app', 'Nilai Aset'),
+            'sarana_prasarana' => Yii::t('app', 'Sarana Prasarana'),
+            'jumlah_tenaga_kerja' => Yii::t('app', 'Jumlah Tenaga Kerja'),
+            'daerah_pemasaran' => Yii::t('app', 'Daerah Pemasaran'),
         ];
     }
-    public function getPropinsi()
-    {
-        return $this->hasOne(Propinsi::className(), ['id_propinsi' => 'id_propinsi']);
-    }
 
-    
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getKota()
-    {
-        return $this->hasOne(Kota::className(), ['id_kota' => 'id_kota']);
-    }
 
-   
+public function getPropinsi()
+{
+    return $this->hasOne(Propinsi::className(), ['id_propinsi' => 'id_propinsi']);
+}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getKecamatan()
-    {
-        return $this->hasOne(Kecamatan::className(), ['id_kecamatan' => 'id_kecamatan']);
-    }
+/**
+ * @return \yii\db\ActiveQuery
+ */
+public function getKota()
+{
+    return $this->hasOne(Kota::className(), ['id_kota' => 'id_kota']);
+}
 
-   
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getKelurahan()
-    {
-        return $this->hasOne(Kelurahan::className(), ['id_kelurahan' => 'id_kelurahan']);
-    }
+/**
+ * @return \yii\db\ActiveQuery
+ */
+public function getKecamatan()
+{
+    return $this->hasOne(Kecamatan::className(), ['id_kecamatan' => 'id_kecamatan']);
+}
 
-    
+/**
+ * @return \yii\db\ActiveQuery
+ */
+public function getKelurahan()
+{
+    return $this->hasOne(Kelurahan::className(), ['id_kelurahan' => 'id_kelurahan']);
+}
 }

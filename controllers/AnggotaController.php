@@ -66,13 +66,37 @@ class AnggotaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionPengolahanbaru()
     {
         $model = new Anggota();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) 
+        
+        {
+            $model->jenis_anggota='PENGOLAHAN';    
+    
+           if ($model->save())
+           {
             return $this->redirect(['view', 'id' => $model->id_anggota]);
+           }else {
+            $model->id_propinsi=35;
+            $model->id_kota=3523;      
+            $model->status_kelompok_usaha = 'PENGOLAH';      
+            $model->status_usaha = 'PERORANGAN';
+            $model->perlindungan_asuransi='TANPA ASURANSI';
+            $model->jenis_usaha='PENGOLAH LAINYA';    
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+
         } else {
+            $model->id_propinsi=35;
+            $model->id_kota=3523;      
+            $model->status_kelompok_usaha = 'PENGOLAH';      
+            $model->status_usaha = 'PERORANGAN';
+            $model->perlindungan_asuransi='TANPA ASURANSI';
+            $model->jenis_usaha='PENGOLAH LAINYA';    
             return $this->render('create', [
                 'model' => $model,
             ]);
