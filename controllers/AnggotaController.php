@@ -81,6 +81,9 @@ class AnggotaController extends Controller
            }else {
             $model->id_propinsi=35;
             $model->id_kota=3523;      
+            $model->jenis_anggota='PENGOLAHAN';    
+    
+    
             $model->status_kelompok_usaha = 'PENGOLAH';      
             $model->status_usaha = 'PERORANGAN';
             $model->perlindungan_asuransi='TANPA ASURANSI';
@@ -93,6 +96,9 @@ class AnggotaController extends Controller
         } else {
             $model->id_propinsi=35;
             $model->id_kota=3523;      
+            $model->jenis_anggota='PENGOLAHAN';    
+    
+    
             $model->status_kelompok_usaha = 'PENGOLAH';      
             $model->status_usaha = 'PERORANGAN';
             $model->perlindungan_asuransi='TANPA ASURANSI';
@@ -102,7 +108,38 @@ class AnggotaController extends Controller
             ]);
         }
     }
+    public function actionBudidayabaru()
+    {
+        $model = new Anggota();
 
+        if ($model->load(Yii::$app->request->post()) ) 
+        
+        {
+            $model->jenis_anggota='BUDI DAYA';    
+    
+           if ($model->save())
+           {
+            return $this->redirect(['view', 'id' => $model->id_anggota]);
+           }else {
+            $model->id_propinsi=35;
+            $model->id_kota=3523;      
+            $model->jenis_anggota='BUDI DAYA';    
+    
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+
+        } else {
+            $model->id_propinsi=35;
+            $model->id_kota=3523;      
+            $model->jenis_anggota='BUDI DAYA';    
+    
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
     
 // THE CONTROLLER
 public function actionKota() {

@@ -91,12 +91,24 @@ class Anggota extends \yii\db\ActiveRecord
     {
         return [
             [['nama_anggota', 'nik', 'tempat_lahir', 'tgl_lahir', 'alamat', 'id_propinsi', 'id_kota', 'jml_anggota_keluarga'], 'required'],
-            [['jenis_kelamin', 'jenis_anggota','golongan_darah', 'alamat', 'status_pernikahan', 'status_dalam_keluarga', 'pendidikan', 'status_kelompok_usaha', 'status_usaha', 'perlindungan_asuransi', 'jenis_usaha', 'sarana_prasarana', 'daerah_pemasaran'], 'string'],
+            [['jenis_kelamin', 'jenis_anggota','golongan_darah', 
+            'alamat', 'status_pernikahan', 'status_dalam_keluarga', 
+            'pendidikan', 'status_kelompok_usaha', 'status_usaha',
+             'perlindungan_asuransi', 'jenis_usaha', 'sarana_prasarana', 
+             'daerah_pemasaran','status_kelompok_budidaya','jenis_budidaya','nomor_sertifikat','npwp'], 'string'],
             [['tgl_lahir', 'created_at', 'updated_at'], 'safe'],
             [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan', 'jml_anggota_keluarga', 'stat_siup', 'stat_situ', 'stat_tdp', 'stat_ho', 'stat_izin_lainnya', 'stat_skp', 'stat_haccp', 'stat_pirt', 'stat_sni', 'stat_sertifikat_lainnya', 'tahun_berdiri', 'jumlah_tenaga_kerja'], 'integer'],
-            [['jumlah_bahan_baku_bulanan', 'jumlah_produksi_bulanan', 'kapasitas_produksi_bulanan', 'pendapatan_bulanan', 'nilai_aset'], 'number'],
+            [['jumlah_bahan_baku_bulanan', 'jumlah_produksi_bulanan',
+             'kapasitas_produksi_bulanan', 'pendapatan_bulanan', 'nilai_aset','luas_lahan','nilai_sertifikasi'], 'number'],
             [['nama_anggota', 'nik', 'tempat_lahir', 'jabatan_dalam_usaha', 'no_kontak_yang_bisa_dihubungi', 'jenis_bahan_baku', 'asal_bahan_baku'], 'string', 'max' => 255],
             [['nik'], 'unique'],
+            [['status_kelompok_usaha', 'status_usaha', 'perlindungan_asuransi', 'jenis_usaha'],'required', 'when' => function($model) {
+                return $model->jenis_anggota == 'PENGOLAHAN';
+            }],
+            [['status_kelompok_budidaya', 'jenis_budidaya', 'status_sertifikasi_cbib_cpib'
+            ],'required', 'when' => function($model) {
+                return $model->jenis_anggota == 'BUDI DAYA';
+            }]
         ];
     }
 

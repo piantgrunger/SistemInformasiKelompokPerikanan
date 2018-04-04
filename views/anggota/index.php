@@ -44,6 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <p> <?php if ((Mimin::checkRoute($this->context->id."/pengolahanbaru"))){ ?> 
            <?=  Html::a(Yii::t('app', 'Anggota Pengolahan Baru'), ['pengolahanbaru'], ['class' => 'btn btn-success']) ?>
     <?php } ?>    </p>
+    <p> <?php if ((Mimin::checkRoute($this->context->id."/budidayabaru"))){ ?> 
+           <?=  Html::a(Yii::t('app', 'Anggota Budi Daya Baru'), ['budidayabaru'], ['class' => 'btn btn-success']) ?>
+    <?php } ?>    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

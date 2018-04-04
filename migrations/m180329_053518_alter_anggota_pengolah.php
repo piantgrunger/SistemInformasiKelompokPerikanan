@@ -28,7 +28,7 @@ class m180329_053518_alter_anggota_pengolah extends Migration
         $this->addColumn('tb_m_anggota','stat_sni',$this->integer());
         $this->addColumn('tb_m_anggota','stat_sertifikat_lainnya',$this->integer());
         $this->addColumn('tb_m_anggota','tahun_berdiri',$this->integer());
-        $this->addColumn('tb_m_anggota','jenis_usaha',"enum('PEMINDANGAN',	'PENGERINGAN',	'PEMBEKUAN',	'FERMENTASI'	,'PENGASAPAN'	,'PENGOLAH LAINYA')");
+        $this->addColumn('tb_m_anggota','jenis_usaha',"enums('PEMINDANGAN',	'PENGERINGAN',	'PEMBEKUAN',	'FERMENTASI'	,'PENGASAPAN'	,'PENGOLAH LAINYA')");
         $this->addColumn('tb_m_anggota','jenis_bahan_baku',$this->string());
         $this->addColumn('tb_m_anggota','asal_bahan_baku',$this->string());
         $this->addColumn('tb_m_anggota','jumlah_bahan_baku_bulanan',$this->decimal(19,4));
