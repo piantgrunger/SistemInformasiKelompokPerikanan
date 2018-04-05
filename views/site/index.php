@@ -1,29 +1,22 @@
-<?php
 
-/* @var $this yii\web\View */
+<?php use yii\helpers\Url;
+
+$wallpaper =Url::to(['/img/wallpaper.jpg'],true);
+$css = ".section-with-bg
+{
+    background: url('$wallpaper') no-repeat 50% 0;
+        height:800px; 
+
+}";
+$this->registerCSS($css);
 
 
 ?>
 <div class="site-index">
 
-    <div class="jumbotron">
-        <h1>SELAMAT DATANG!</h1>
-
-        
-
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-
-
-            </div>
-            <div class="col-lg-4">
-            </div>
-            </div>
-        </div>
-
-    </div>
-</div>
+ 
+    <section class="section-with-bg" >
+    </section >
+    
+  
+ </div>

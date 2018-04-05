@@ -70,39 +70,36 @@ class AnggotaController extends Controller
     {
         $model = new Anggota();
 
-        if ($model->load(Yii::$app->request->post()) ) 
-        
-        {
-            $model->jenis_anggota='PENGOLAHAN';    
-    
-           if ($model->save())
-           {
-            return $this->redirect(['view', 'id' => $model->id_anggota]);
-           }else {
-            $model->id_propinsi=35;
-            $model->id_kota=3523;      
-            $model->jenis_anggota='PENGOLAHAN';    
-    
-    
-            $model->status_kelompok_usaha = 'PENGOLAH';      
-            $model->status_usaha = 'PERORANGAN';
-            $model->perlindungan_asuransi='TANPA ASURANSI';
-            $model->jenis_usaha='PENGOLAH LAINYA';    
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        if ($model->load(Yii::$app->request->post())) {
+            $model->jenis_anggota = 'PENGOLAHAN';
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id_anggota]);
+            } else {
+                $model->id_propinsi = 35;
+                $model->id_kota = 3523;
+                $model->jenis_anggota = 'PENGOLAHAN';
+
+
+                $model->status_kelompok_usaha = 'PENGOLAH';
+                $model->status_usaha = 'PERORANGAN';
+                $model->perlindungan_asuransi = 'TANPA ASURANSI';
+                $model->jenis_usaha = 'PENGOLAH LAINYA';
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
 
         } else {
-            $model->id_propinsi=35;
-            $model->id_kota=3523;      
-            $model->jenis_anggota='PENGOLAHAN';    
-    
-    
-            $model->status_kelompok_usaha = 'PENGOLAH';      
+            $model->id_propinsi = 35;
+            $model->id_kota = 3523;
+            $model->jenis_anggota = 'PENGOLAHAN';
+
+
+            $model->status_kelompok_usaha = 'PENGOLAH';
             $model->status_usaha = 'PERORANGAN';
-            $model->perlindungan_asuransi='TANPA ASURANSI';
-            $model->jenis_usaha='PENGOLAH LAINYA';    
+            $model->perlindungan_asuransi = 'TANPA ASURANSI';
+            $model->jenis_usaha = 'PENGOLAH LAINYA';
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -112,29 +109,26 @@ class AnggotaController extends Controller
     {
         $model = new Anggota();
 
-        if ($model->load(Yii::$app->request->post()) ) 
-        
-        {
-            $model->jenis_anggota='BUDI DAYA';    
-    
-           if ($model->save())
-           {
-            return $this->redirect(['view', 'id' => $model->id_anggota]);
-           }else {
-            $model->id_propinsi=35;
-            $model->id_kota=3523;      
-            $model->jenis_anggota='BUDI DAYA';    
-    
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        if ($model->load(Yii::$app->request->post())) {
+            $model->jenis_anggota = 'BUDI DAYA';
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id_anggota]);
+            } else {
+                $model->id_propinsi = 35;
+                $model->id_kota = 3523;
+                $model->jenis_anggota = 'BUDI DAYA';
+
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
 
         } else {
-            $model->id_propinsi=35;
-            $model->id_kota=3523;      
-            $model->jenis_anggota='BUDI DAYA';    
-    
+            $model->id_propinsi = 35;
+            $model->id_kota = 3523;
+            $model->jenis_anggota = 'BUDI DAYA';
+
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -142,49 +136,52 @@ class AnggotaController extends Controller
     }
     
 // THE CONTROLLER
-public function actionKota() {
-    $out = [];
-    if (isset($_POST['depdrop_parents'])) {
-        $id_propinsi = $_POST['depdrop_parents'];
+    public function actionKota()
+    {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $id_propinsi = $_POST['depdrop_parents'];
             $out = Kota::getDataBrowseKota($id_propinsi); 
             // the getDefaultSubCat function will query the database
             // and return the default sub cat for the cat_id
-            
-            echo Json::encode(['output'=>$out, 'selected'=>'']);
+
+            echo Json::encode(['output' => $out, 'selected' => '']);
             return;
+        }
+        echo Json::encode(['output' => '', 'selected' => '']);
     }
-    echo Json::encode(['output'=>'', 'selected'=>'']);
-}
 // THE CONTROLLER
-public function actionKelurahan() {
-    $out = [];
-    if (isset($_POST['depdrop_parents'])) {
-        $id_propinsi = $_POST['depdrop_parents'];
+    public function actionKelurahan()
+    {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $id_propinsi = $_POST['depdrop_parents'];
             $out = Kelurahan::getDataBrowseKelurahan($id_propinsi); 
             // the getDefaultSubCat function will query the database
             // and return the default sub cat for the cat_id
-            
-            echo Json::encode(['output'=>$out, 'selected'=>'']);
+
+            echo Json::encode(['output' => $out, 'selected' => '']);
             return;
+        }
+        echo Json::encode(['output' => '', 'selected' => '']);
     }
-    echo Json::encode(['output'=>'', 'selected'=>'']);
-}
 
 
 // THE CONTROLLER
-public function actionKecamatan() {
-    $out = [];
-    if (isset($_POST['depdrop_parents'])) {
-        $id_propinsi = $_POST['depdrop_parents'];
+    public function actionKecamatan()
+    {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $id_propinsi = $_POST['depdrop_parents'];
             $out = Kecamatan::getDataBrowseKecamatan($id_propinsi); 
             // the getDefaultSubCat function will query the database
             // and return the default sub cat for the cat_id
-            
-            echo Json::encode(['output'=>$out, 'selected'=>'']);
+
+            echo Json::encode(['output' => $out, 'selected' => '']);
             return;
+        }
+        echo Json::encode(['output' => '', 'selected' => '']);
     }
-    echo Json::encode(['output'=>'', 'selected'=>'']);
-}
 
     /**
      * Updates an existing Anggota model.
@@ -213,19 +210,16 @@ public function actionKecamatan() {
      */
     public function actionDelete($id)
     {
-        
-       try
-      {
-        $this->findModel($id)->delete();
-      
-      }
-      catch(\yii\db\IntegrityException  $e)
-      {
-	Yii::$app->session->setFlash('error', "Data Tidak Dapat Dihapus Karena Dipakai Modul Lain");
-       } 
-         return $this->redirect(['index']);
-    }    
-    
+
+        try {
+            $this->findModel($id)->delete();
+
+        } catch (\yii\db\IntegrityException $e) {
+            Yii::$app->session->setFlash('error', "Data Tidak Dapat Dihapus Karena Dipakai Modul Lain");
+        }
+        return $this->redirect(['index']);
+    }
+
 
     /**
      * Finds the Anggota model based on its primary key value.
