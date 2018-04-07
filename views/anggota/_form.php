@@ -20,6 +20,8 @@ use yii\bootstrap\Tabs;
 <div class="anggota-form">
 
     <?php $form = ActiveForm::begin();
+  echo $form->errorSummary($model) ;
+
     
     $item =
 [
@@ -45,6 +47,13 @@ if($model->jenis_anggota ==='BUDI DAYA')
 $item[]= [
     'label' => 'Data Budi Daya',
     'content' => $this->render('_form_budidaya', ['model' => $model, 'form' => $form]),
+];
+}
+if($model->jenis_anggota ==='PRODUKSI GARAM')
+{
+$item[]= [
+    'label' => 'Data Produksi Garam',
+    'content' => $this->render('_form_garam', ['model' => $model, 'form' => $form]),
 ];
 }
 

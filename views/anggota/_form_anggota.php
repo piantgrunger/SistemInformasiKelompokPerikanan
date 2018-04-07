@@ -10,6 +10,7 @@ use yii\helpers\Url;
 use kartik\datecontrol\DateControl;
 use yii\bootstrap\Tabs;
 ?>
+
     <?= $form->field($model, 'nama_anggota')->textInput(['maxlength' => true]) ?>
 
 <?= $form->field($model, 'nik')->textInput(['maxlength' => true]) ?>
@@ -24,21 +25,9 @@ use yii\bootstrap\Tabs;
 
 <?= $form->field($model, 'alamat')->textarea(['rows' => 6]) ?>
 
-<?= $form->field($model, 'id_propinsi')->widget(Select2::classname(), [
+<?=  Html::activeHiddenInput($model, 'id_propinsi')?>	  
 
-'data' => Propinsi::getDataBrowsePropinsi(),
-'options' => ['placeholder' => 'Pilih Propinsi ...'],
-'pluginOptions' => [
-    'allowClear' => true
-],])->label('Propinsi'); ?>	  
-
-<?= $form->field($model, 'id_kota')->widget(Select2::classname(), [
-
-'data' => Kota::getDataBrowseKota($model->id_kota),
-'options' => ['placeholder' => 'Pilih Propinsi ...'],
-'pluginOptions' => [
-    'allowClear' => true
-],])->label('Kota / Kabupaten'); ?>	  
+<?= Html::activeHiddenInput($model, 'id_kota') ?>	  
 
    <?= $form->field($model, 'id_kecamatan')->widget(DepDrop::classname(), [
 'type'=>DepDrop::TYPE_SELECT2,

@@ -108,7 +108,11 @@ class Anggota extends \yii\db\ActiveRecord
             [['status_kelompok_budidaya', 'jenis_budidaya', 'status_sertifikasi_cbib_cpib'
             ],'required', 'when' => function($model) {
                 return $model->jenis_anggota == 'BUDI DAYA';
-            }]
+            }],
+            [['status_kelompok_usaha', 'status_usaha', 'perlindungan_asuransi', 'jenis_usaha','status_lahan','tekhnologi_digunakan'],'required', 'when' => function($model) {
+                return $model->jenis_anggota == 'PRODUKSI GARAM';
+            }],
+           
         ];
     }
 

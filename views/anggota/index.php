@@ -40,14 +40,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p> <?php if ((Mimin::checkRoute($this->context->id."/pengolahanbaru"))){ ?> 
+   <div class="row">
+   <div class="col-sm-1">    <p> <?php if ((Mimin::checkRoute($this->context->id."/pengolahanbaru"))){ ?> 
            <?=  Html::a(Yii::t('app', 'Anggota Pengolahan Baru'), ['pengolahanbaru'], ['class' => 'btn btn-success']) ?>
     <?php } ?>    </p>
     <p> <?php if ((Mimin::checkRoute($this->context->id."/budidayabaru"))){ ?> 
            <?=  Html::a(Yii::t('app', 'Anggota Budi Daya Baru'), ['budidayabaru'], ['class' => 'btn btn-success']) ?>
     <?php } ?>    </p>
 
+    <p> <?php if ((Mimin::checkRoute($this->context->id."/budidayabaru"))){ ?> 
+           <?=  Html::a(Yii::t('app', 'Anggota Produksi  Garam Baru'), ['garambaru'], ['class' => 'btn btn-success']) ?>
+    <?php } ?>    </p>
+    </div>
+    </div>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
