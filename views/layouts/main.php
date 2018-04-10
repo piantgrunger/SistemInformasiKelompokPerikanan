@@ -22,10 +22,11 @@ $menuItems =
                         'items' => [
                     ['label' => 'App. Route', 'icon' =>  'fa fa-circle-o', 'url' => ['/mimin/route/'],'visible' => !Yii::$app->user->isGuest],
                     ['label' => 'Role', 'icon' =>  'fa fa-circle-o', 'url' => ['/mimin/role/'],'visible' => !Yii::$app->user->isGuest],
-                    ['label' => 'User', 'icon' => ' fa fa-circle-o', 'url' => ['/user/'],'visible' => !Yii::$app->user->isGuest],
+                    ['label' => 'User', 'icon' => ' fa fa-circle-o', 'url' => ['/user/index'],'visible' => !Yii::$app->user->isGuest],
                    ]]
                         ,
-                        ['label' => 'Anggota', 'icon' => 'fa fa-file-code-o', 'url' => ['/anggota/'],'visible' => !Yii::$app->user->isGuest],
+                        ['label' => 'Anggota', 'icon' => 'fa fa-file-code-o', 'url' => ['/anggota/index'],'visible' => !Yii::$app->user->isGuest],
+                        ['label' => 'Kelompok', 'icon' => 'fa fa-file-code-o', 'url' => ['/kelompok/index'],'visible' => !Yii::$app->user->isGuest],
                         
                 ];     
                 
