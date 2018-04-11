@@ -109,7 +109,7 @@ class Anggota extends \yii\db\ActiveRecord
             ],'required', 'when' => function($model) {
                 return $model->jenis_anggota == 'BUDI DAYA';
             }],
-            [['status_kelompok_usaha', 'status_usaha', 'perlindungan_asuransi', 'jenis_usaha','status_lahan','tekhnologi_digunakan'],'required', 'when' => function($model) {
+            [['status_kelompok_usaha',  'perlindungan_asuransi', 'status_lahan','tekhnologi_digunakan'],'required', 'when' => function($model) {
                 return $model->jenis_anggota == 'PRODUKSI GARAM';
             }],
            
