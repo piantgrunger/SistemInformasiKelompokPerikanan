@@ -31,8 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'nama_kelompok',
             'tgl_pendirian',
-            'id_propinsi',
-            'id_kota',
             'id_kecamatan',
             'id_kelurahan',
             'no_pengukuhan',

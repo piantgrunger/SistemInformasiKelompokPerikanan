@@ -16,10 +16,6 @@ use kartik\datecontrol\DateControl;
 ?>
 
 <div class="anggota-form">
-<?= $form->field($model, 'status_kelompok_usaha')->dropDownList([ 'PENGOLAH' => 'PENGOLAH', 'PEMASAR' => 'PEMASAR', 'PENGOLAH DAN PEMASAR' => 'PENGOLAH DAN PEMASAR', ], ['prompt' => '']) ?>
-
-
-<?= $form->field($model, 'perlindungan_asuransi')->dropDownList([ 'ASURANSI TENAGA KERJA' => 'ASURANSI TENAGA KERJA', 'ASURANSI KESEHATAN' => 'ASURANSI KESEHATAN', 'TANPA ASURANSI' => 'TANPA ASURANSI', ], ['prompt' => '']) ?>
 
 <?= $form->field($model, 'no_kontak_yang_bisa_dihubungi')->textInput(['maxlength' => true]) ?>
 
@@ -48,6 +44,7 @@ use kartik\datecontrol\DateControl;
 <?= $form->field($model, 'status_lahan')->dropDownList([ 'MILIK SENDIRI' => 'MILIK SENDIRI', 'SEWA' => 'SEWA' ], ['prompt' => '']) ?>
 
 
-<?= $form->field($model, 'tekhnologi_digunakan')->dropDownList([ 'TRADISIONAL' => 'TRADISIONAL', 'GEOISOLATOR' => 'GEOISOLATOR' ], ['prompt' => '']) ?>
+<?= $form->field($model, 'tekhnologi_digunakan')->dropDownList([ 'INTENSIF' => 'INTENSIF', 'TRADISIONAL' => 'TRADISIONAL' ], ['prompt' => '']) ?>
+<?= $form->field($model, 'kualitas_produksi')->dropDownList([ 'KP1' => 'KP1', 'KP2' => 'KP2' ], ['prompt' => '']) ?>
 
 </div>

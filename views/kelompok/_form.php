@@ -64,7 +64,7 @@ use yii\bootstrap\Tabs;
 
     <?= $form->field($model, 'no_akte_notaris')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'tgl_akte_notaris')->textInput() ?>
+    <?= $form->field($model, 'tgl_akte_notaris')->widget(DateControl::classname()) ?>
 
     <?= $form->field($model, 'nama_notaris')->textInput(['maxlength' => true]) ?>
 

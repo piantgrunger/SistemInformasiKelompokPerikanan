@@ -109,7 +109,7 @@ class Anggota extends \yii\db\ActiveRecord
             ],'required', 'when' => function($model) {
                 return $model->jenis_anggota == 'BUDI DAYA';
             }],
-            [['status_kelompok_usaha',  'perlindungan_asuransi', 'status_lahan','tekhnologi_digunakan'],'required', 'when' => function($model) {
+            [[ 'status_lahan','tekhnologi_digunakan','kualitas_produksi'],'required', 'when' => function($model) {
                 return $model->jenis_anggota == 'PRODUKSI GARAM';
             }],
            
@@ -191,6 +191,10 @@ public function getKecamatan()
 {
     return $this->hasOne(Kecamatan::className(), ['id_kecamatan' => 'id_kecamatan']);
 }
+public function getNama_kecamatan()
+{
+    return $this->kecamatan->nama_kecamatan;
+}
 
 /**
  * @return \yii\db\ActiveQuery
@@ -199,4 +203,9 @@ public function getKelurahan()
 {
     return $this->hasOne(Kelurahan::className(), ['id_kelurahan' => 'id_kelurahan']);
 }
+public function getNama_desa()
+{
+    return $this->kelurahan->nama_kelurahan;
+}
+
 }
