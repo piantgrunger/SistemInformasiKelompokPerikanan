@@ -15,11 +15,14 @@ class AnggotaSearch extends Anggota
     /**
      * @inheritdoc
      */
+    public $nama_kecamatan;
+    public $nama_desa;
     public function rules()
     {
         return [
             [['id_anggota', 'id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan', 'jml_anggota_keluarga'], 'integer'],
-            [['nama_anggota', 'nik', 'jenis_kelamin', 'tempat_lahir', 'tgl_lahir', 'golongan_darah', 'alamat', 'status_pernikahan', 'status_dalam_keluarga', 'pendidikan', 'created_at', 'updated_at'], 'safe'],
+            [['nama_anggota', 'nik', 'jenis_kelamin', 'tempat_lahir', 'tgl_lahir', 'golongan_darah', 'alamat', 'status_pernikahan', 'status_dalam_keluarga', 'pendidikan', 'created_at', 'updated_at'
+              ,'jenis_anggota','nama_kecamatan','nama_desa'], 'safe'],
         ];
     }
 
@@ -41,7 +44,9 @@ class AnggotaSearch extends Anggota
      */
     public function search($params)
     {
-        $query = Anggota::find();
+        $query = Anggota::find()->select('tb_m_anggota.*, nama_kelurahan,nama_kecamatan as nama_desa')
+                ->leftJoin('tb_m_kecamatan' , 'tb_m_kecamatan.id_kecamatan = tb_m_anggota.id_kecamatan')
+                ->leftJoin('tb_m_kelurahan' , 'tb_m_kelurahan.id_kelurahan = tb_m_anggota.id_kelurahan');
 
         // add conditions that should always apply here
 
@@ -78,7 +83,11 @@ class AnggotaSearch extends Anggota
             ->andFilterWhere(['like', 'alamat', $this->alamat])
             ->andFilterWhere(['like', 'status_pernikahan', $this->status_pernikahan])
             ->andFilterWhere(['like', 'status_dalam_keluarga', $this->status_dalam_keluarga])
-            ->andFilterWhere(['like', 'pendidikan', $this->pendidikan]);
+            ->andFilterWhere(['like', 'pendidikan', $this->pendidikan])
+            ->andFilterWhere(['like', 'nama_kecamatan', $this->nama_kecamatan])
+            ->andFilterWhere(['like', 'nama_kelurahan', $this->nama_desa])
+            ->andFilterWhere(['like', 'jenis_anggota', $this->jenis_anggota])
+            ;
 
         return $dataProvider;
     }

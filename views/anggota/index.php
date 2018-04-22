@@ -4,15 +4,36 @@
 use hscstudio\mimin\components\Mimin;
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use yii\widgets\Pjax; use kartik\export\ExportMenu;
+use yii\widgets\Pjax;
+ use kartik\export\ExportMenu;
+use yii\helpers\ArrayHelper;
+use app\models\Kecamatan;
+use app\models\Kelurahan;
+
 $gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
             'nama_anggota',
             'nik',
             'jenis_kelamin',
-            'jenis_anggota',
+            [
+            'attribute'=>'jenis_anggota',
+            'value'=>'jenis_anggota',
+           
+            'filter'=>['PENGOLAHAN'=>'PENGOLAHAN','BUDI DAYA'=>'BUDI DAYA','PRODUKSI GARAM'=>'PRODUKSI GARAM']
+            ],
             // 'tgl_lahir',
             // 'golongan_darah',
             'alamat:ntext',
+            [
+                'attribute'=>'nama_kecamatan',
+                'value'=>'nama_kecamatan',
+               
+                'filter'=>ArrayHelper::map(Kecamatan::find()->where('id_kota=3523')->asArray()->all(),  'nama_kecamatan','nama_kecamatan')
+            ],
+            [
+                'attribute'=>'nama_desa',
+                'value'=>'nama_desa',
+               
+            ],
             // 'id_propinsi',
             // 'id_kota',
          //    'nama_kecamatan',
@@ -50,13 +71,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
    <div class="row">
-   <div class="col-sm-1">    <p> <?php if ((Mimin::checkRoute($this->context->id."/pengolahanbaru"))){ ?> 
+   <div class="col-md-4 text-center">    <p> <?php if ((Mimin::checkRoute($this->context->id."/pengolahanbaru"))){ ?> 
            <?=  Html::a(Yii::t('app', 'Anggota Pengolahan Baru'), ['pengolahanbaru'], ['class' => 'btn btn-success']) ?>
     <?php } ?>    </p>
+    </div><div class="col-md-4 text-center">
     <p> <?php if ((Mimin::checkRoute($this->context->id."/budidayabaru"))){ ?> 
            <?=  Html::a(Yii::t('app', 'Anggota Budi Daya Baru'), ['budidayabaru'], ['class' => 'btn btn-success']) ?>
     <?php } ?>    </p>
-
+    </div><div class="col-md-4 text-center">
     <p> <?php if ((Mimin::checkRoute($this->context->id."/budidayabaru"))){ ?> 
            <?=  Html::a(Yii::t('app', 'Anggota Produksi  Garam Baru'), ['garambaru'], ['class' => 'btn btn-success']) ?>
     <?php } ?>    </p>

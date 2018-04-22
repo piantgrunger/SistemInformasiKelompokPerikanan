@@ -224,7 +224,7 @@ public function getKecamatan()
 }
 public function getNama_kecamatan()
 {
-    return $this->kecamatan->nama_kecamatan;
+    return ($this->kecamatan===null)?"": $this->kecamatan->nama_kecamatan;
 }
 
 /**
@@ -236,7 +236,7 @@ public function getKelurahan()
 }
 public function getNama_desa()
 {
-    return $this->kelurahan->nama_kelurahan;
+    return ($this->kelurahan===null)?"":$this->kelurahan->nama_kelurahan;
 }
 
 }
