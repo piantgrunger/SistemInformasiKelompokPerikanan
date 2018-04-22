@@ -227,7 +227,7 @@ $pdf = new Pdf([
 ]);
   return $pdf->render();
     }
-    /**
+    
 
 
 // THE CONTROLLER

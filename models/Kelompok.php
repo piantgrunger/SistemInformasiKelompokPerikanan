@@ -7,6 +7,8 @@ use Yii;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use mdm\behaviors\ar\RelationTrait;
+
 
 
 /**
@@ -38,6 +40,7 @@ class Kelompok extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    use RelationTrait;
 
 
     public function behaviors()
@@ -107,6 +110,15 @@ class Kelompok extends \yii\db\ActiveRecord
 public function getPropinsi()
 {
     return $this->hasOne(Propinsi::className(), ['id_propinsi' => 'id_propinsi']);
+}
+
+public function getDetailKelompok()
+{
+    return $this->hasMany(Detkelompok::className(), ['id_kelompok' => 'id_kelompok']);
+}
+public function setDetailKelompok($value)
+{
+    return $this->loadRelated('detailKelompok',$value);
 }
 
 /**

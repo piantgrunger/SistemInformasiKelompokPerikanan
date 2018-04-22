@@ -64,9 +64,22 @@ class KelompokController extends Controller
     public function actionCreate()
     {
         $model = new Kelompok();
+        if ($model->load(Yii::$app->request->post()) ) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $model->detailKelompok = Yii::$app->request->post('Detkelompok', []);
+             
+                if ($model->save()) {
+                    $transaction->commit();
+                    return $this->redirect(['view', 'id' => $model->id_kelompok]);
+                }
+                $transaction->rollBack();
+            } catch (\Exception $ecx) {
+                $transaction->rollBack();
+                throw $ecx;
+            }
+     
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_kelompok]);
         } else {
             $model->id_propinsi = 35;
             $model->id_kota = 3523;
@@ -85,10 +98,22 @@ class KelompokController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_kelompok]);
-        } else {
+        if ($model->load(Yii::$app->request->post()) ) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $model->detailKelompok = Yii::$app->request->post('Detkelompok', []);
+             
+                if ($model->save()) {
+                    $transaction->commit();
+                    return $this->redirect(['view', 'id' => $model->id_kelompok]);
+                }
+                $transaction->rollBack();
+            } catch (\Exception $ecx) {
+                $transaction->rollBack();
+                throw $ecx;
+            }
+     
+          } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
