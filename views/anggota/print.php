@@ -11,7 +11,7 @@ $attributes=[
     'nik',
     'jenis_kelamin',
     'tempat_lahir',
-    'tgl_lahir',
+    'tgl_lahir:date',
     'golongan_darah',
     'alamat:ntext',
      'nama_kecamatan',
