@@ -3,6 +3,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Propinsi;
 use app\models\Kota;
+use kartik\widgets\FileInput;
+
 
 use kartik\widgets\Select2;
 use kartik\widgets\DepDrop;
@@ -14,6 +16,19 @@ use yii\bootstrap\Tabs;
     <?= $form->field($model, 'nama_anggota')->textInput(['maxlength' => true]) ?>
 
 <?= $form->field($model, 'nik')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'foto_anggota')->widget(FileInput::classname(), [
+    'options' => ['accept' => 'image/*'],
+    'pluginOptions' => [
+        'overwriteInitial'=>true,
+        'showUpload' => false,
+        'initialPreview'=> [
+            '<img src="'.Url::to(['/image\/'.$model->foto_anggota],true).'" class="file-preview-image kv-preview-data rotate-1"  style="width:auto;height:160px;"',
+        ],
+        'initialCaption'=>$model->foto_anggota,
+        
+    ],
+]); ?>
 
 <?= $form->field($model, 'jenis_kelamin')->dropDownList([ 'Laki-Laki' => 'Laki-Laki', 'Perempuan' => 'Perempuan', ], ['prompt' => '']) ?>
 

@@ -142,8 +142,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?php } ?>    </p>
+        <?php } ?>    
 
+<?php if ((Mimin::checkRoute($this->context->id."/print"))){ ?>        <?= Html::a(Yii::t('app', 'Cetak'), ['print', 'id' => $model->id_anggota], ['class' => 'btn btn-success']) ?>
+    <?php } ?>    </p>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => $attributes,

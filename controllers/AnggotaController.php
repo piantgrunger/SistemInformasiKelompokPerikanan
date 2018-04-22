@@ -13,6 +13,7 @@ use app\models\Kota;
 use app\models\Kelurahan;
 use app\models\Kecamatan;
 use yii\helpers\Url;
+use kartik\mpdf\Pdf; 
 
 /**
  * AnggotaController implements the CRUD actions for Anggota model.
@@ -38,7 +39,9 @@ class AnggotaController extends Controller
      * Lists all Anggota models.
      * @return mixed
      */
-    public function actionIndex()
+   
+   
+     public function actionIndex()
     {
         $searchModel = new AnggotaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -73,7 +76,7 @@ class AnggotaController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->jenis_anggota = 'PENGOLAHAN';
 
-            if ($model->save()) {
+            if ($model->upload()&&$model->save()) {
                 return $this->redirect(['view', 'id' => $model->id_anggota]);
             } else {
                 $model->id_propinsi = 35;
@@ -112,7 +115,7 @@ class AnggotaController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->jenis_anggota = 'BUDI DAYA';
 
-            if ($model->save()) {
+            if ($model->upload()&& $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id_anggota]);
             } else {
                 $model->id_propinsi = 35;
@@ -141,7 +144,7 @@ class AnggotaController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->jenis_anggota = 'PRODUKSI GARAM';
 
-            if ($model->save()) {
+            if ($model->upload()&&$model->save()) {
                 return $this->redirect(['view', 'id' => $model->id_anggota]);
             } else {
                 $model->id_propinsi = 35;
@@ -194,6 +197,37 @@ class AnggotaController extends Controller
         }
         echo Json::encode(['output' => '', 'selected' => '']);
     }
+    public function actionPrint($id)
+    {
+        $model = $this->findModel($id);
+        
+         $content = $this->renderPartial('print',['model'=>$model]);
+         
+   
+         // setup kartik\mpdf\Pdf component
+$pdf = new Pdf([
+   // set to use core fonts only
+   'mode' => Pdf::MODE_UTF8, 
+   // A4 paper format
+   'format' => Pdf::FORMAT_A4, 
+   // portrait orientation
+   'orientation' => Pdf::ORIENT_PORTRAIT, 
+   // stream to browser inline
+   'destination' => Pdf::DEST_BROWSER, 
+   // your html content input
+   'content' => $content,  
+   // format content from your own css file if needed or use the
+   // enhanced bootstrap css built by Krajee for mPDF formatting 
+   'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+   // any css to be embedded if required
+   'cssInline' => '.kv-heading-1{font-size:18px}', 
+    // set mPDF properties on the fly
+   'options' => ['title' => 'Cetak Pengantar Pencairan '],
+    // call mPDF methods on the fly
+]);
+  return $pdf->render();
+    }
+    /**
 
 
 // THE CONTROLLER
@@ -221,8 +255,9 @@ class AnggotaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->old_foto_anggota=$model->foto_anggota;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) &&$model->upload()&& $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_anggota]);
         } else {
             return $this->render('update', [

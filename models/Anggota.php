@@ -7,6 +7,8 @@ use Yii;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\web\UploadedFile;
+
 
 
 /**
@@ -60,6 +62,8 @@ use yii\db\Expression;
  */
 class Anggota extends \yii\db\ActiveRecord
 {
+    public $old_foto_anggota;
+
     /**
      * @inheritdoc
      */
@@ -102,6 +106,8 @@ class Anggota extends \yii\db\ActiveRecord
              'kapasitas_produksi_bulanan', 'pendapatan_bulanan', 'nilai_aset','luas_lahan','nilai_sertifikasi'], 'number'],
             [['nama_anggota', 'nik', 'tempat_lahir', 'jabatan_dalam_usaha', 'no_kontak_yang_bisa_dihubungi', 'jenis_bahan_baku', 'asal_bahan_baku'], 'string', 'max' => 255],
             [['nik'], 'unique'],
+            [['foto_anggota'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg','maxSize' => 512000000],
+ 
             [['status_kelompok_usaha', 'status_usaha', 'perlindungan_asuransi', 'jenis_usaha'],'required', 'when' => function($model) {
                 return $model->jenis_anggota == 'PENGOLAHAN';
             }],
@@ -170,7 +176,32 @@ class Anggota extends \yii\db\ActiveRecord
         ];
     }
 
-
+    public function upload()
+    {
+        $path =Yii::getAlias('@app').'/web/image/';
+        $fieldName ='foto_anggota';
+       
+        $image = UploadedFile::getInstance($this,$fieldName);
+      
+        if(!empty($image) && $image->size !== 0) {  
+            $fileNames =   md5($this->nik) . '.' .$image->extension;    
+        
+            if ($image->saveAs($path .$fileNames)){
+                $this->attributes=array($fieldName=>$fileNames);
+                
+                return true;
+            } else {
+                return false;
+            }
+        } else
+        {
+            $this->attributes=array($fieldName=>$this->old_foto_anggota);
+            
+               
+          return true;
+        }  
+    }
+ 
 public function getPropinsi()
 {
     return $this->hasOne(Propinsi::className(), ['id_propinsi' => 'id_propinsi']);
