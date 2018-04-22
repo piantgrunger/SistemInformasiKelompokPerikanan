@@ -77,7 +77,7 @@ if( $model->jenis_anggota == 'BUDI DAYA')
 }else
 if( $model->jenis_anggota == 'PRODUKSI GARAM')
 {
-    $attributes=[ 
+    $attributes1=[ 
     'no_kontak_yang_bisa_dihubungi',
     
   'tahun_berdiri',
