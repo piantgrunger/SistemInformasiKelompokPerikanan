@@ -6,7 +6,7 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'SIKP',
-    'name' => 'Sistem Informasi Expedisi',
+    'name' => 'Sistem Informasi Kelompok Perikanan',
     // set target language to be Indonesia
   'language' => 'id-ID',
     'as access' => [
@@ -18,9 +18,9 @@ $config = [
            
           */
          'site/captcha',
-         'resi/kota', 
-         'resi/kelurahan',
-         'resi/kecamatan',
+         'anggota/kota', 
+         'anggota/kelurahan',
+         'anggota/kecamatan',
          'site/logout',
          'user/*',
          'gii/*',

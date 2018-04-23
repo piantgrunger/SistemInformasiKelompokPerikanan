@@ -81,7 +81,7 @@ class Kecamatan extends \yii\db\ActiveRecord
         return $this->hasOne(Kota::className(), ['id_kota' => 'id_kota']);
     }
     
-    public function getDataBrowseKecamatan($id_kota)
+    public static function getDataBrowseKecamatan($id_kota)
     {        
         $data=Kecamatan::find()
             ->select([

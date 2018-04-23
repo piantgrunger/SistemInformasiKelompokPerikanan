@@ -80,7 +80,7 @@ class Kelurahan extends \yii\db\ActiveRecord
         return $this->hasOne(Kelurahan::className(), ['id_Kelurahan' => 'id_Kelurahan']);
     }
 
-    public function getDataBrowseKelurahan($id_kecamatan)
+    public static function getDataBrowseKelurahan($id_kecamatan)
     {        
         $data=Kelurahan::find()
             ->select([
