@@ -7,12 +7,14 @@ use kartik\grid\GridView;
 use yii\widgets\Pjax; use kartik\export\ExportMenu;
 $gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
             'nama_kelompok',
+            'jenis_anggota',
             'tgl_pendirian:date',
            // 'id_propinsi',
             //'id_kota',
              'nama_kecamatan',
              'nama_kelurahan',
             'no_pengukuhan',
+
              'tgl_pengukuhan:date',
             // 'no_akte_notaris',
             // 'tgl_akte_notaris',
@@ -59,8 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'condensed' => false,
         'responsive' => true,
         'hover' => true,
-        'floatHeader' => true,
-        'showPageSummary' => true,
+           'showPageSummary' => true,
         'panel' => [
             'type' => GridView::TYPE_PRIMARY
       

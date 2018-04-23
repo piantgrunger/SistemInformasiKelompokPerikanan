@@ -54,11 +54,11 @@ class Detkelompok extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_kelompok', 'id_anggota'], 'required'],
+            [[ 'id_anggota'], 'required'],
             [['id_kelompok', 'id_anggota'], 'integer'],
             [['posisi'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['id_anggota'], 'unique'],
+            [['id_kelompok','created_at', 'updated_at'], 'safe'],
+            [['id_anggota'], 'unique','message' => 'Ada Anggota yang sudah Memiliki Kelompok'],
             [['id_anggota'], 'exist', 'skipOnError' => true, 'targetClass' => Anggota::className(), 'targetAttribute' => ['id_anggota' => 'id_anggota']],
             [['id_kelompok'], 'exist', 'skipOnError' => true, 'targetClass' => Kelompok::className(), 'targetAttribute' => ['id_kelompok' => 'id_kelompok']],
         ];

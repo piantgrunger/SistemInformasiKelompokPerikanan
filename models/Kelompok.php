@@ -68,7 +68,7 @@ class Kelompok extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama_kelompok', 'tgl_pendirian', 'id_propinsi', 'id_kota', 'no_pengukuhan', 'tgl_pengukuhan', 'tgl_mulai_usaha'], 'required'],
+            [['nama_kelompok', 'tgl_pendirian', 'id_propinsi', 'id_kota', 'no_pengukuhan', 'tgl_pengukuhan', 'tgl_mulai_usaha','jenis_anggota'], 'required'],
             [['tgl_pendirian', 'tgl_pengukuhan', 'tgl_akte_notaris', 'tgl_mulai_usaha', 'created_at', 'updated_at'], 'safe'],
             [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan'], 'integer'],
             [['nama_kelompok', 'no_pengukuhan', 'no_akte_notaris', 'nama_notaris', 'no_telepon', 'no_rekening_bank', 'nama_bank', 'cabang', 'nama_pemilik_rekening'], 'string', 'max' => 255],

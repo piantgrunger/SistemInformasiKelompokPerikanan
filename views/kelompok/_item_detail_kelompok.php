@@ -4,20 +4,22 @@ use kartik\select2\Select2;
 use yii\helpers\Url;
 use app\models\Anggota;
 use yii\helpers\ArrayHelper;
+use kartik\widgets\DepDrop;
 ?>
 
-<td><?= $form->field($model,"[$key]id_anggota")->widget(Select2::classname(),[ 
-     'data' =>ArrayHelper::map(
-        Anggota::find()
-                           ->select([
-                                   'tb_m_anggota.id_anggota','nama_anggota'
-                           ])
-                           ->asArray()
-                           ->all(), 'id_anggota', 'nama_anggota'),
-     'options' => ['placeholder' => 'Pilih Anggota...'],
-     'pluginOptions' => [
-         'allowClear' => true
-     ],])->label(false); ?>
+<td><?= $form->field($model,"[$key]id_anggota")->widget(DepDrop::classname(), [
+'type'=>DepDrop::TYPE_SELECT2,
+'data'=> [$model->id_anggota=>is_null($model->anggota)?"":$model->anggota->nik."-".$model->anggota->nama_anggota],
+'options'=>[ 'placeholder'=>'Pilih Anggota ...'],
+'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+'pluginOptions'=>[
+    'depends'=>['kelompok-jenis_anggota'],
+    'url'=>Url::to(['/kelompok/anggota']),
+    'placeholder'=>'Pilih Anggota ...',
+    'initialize' =>true,
+    
+    ]
+])->label(false); ?>
        
      </td>
      <td>    <?= $form->field($model, "[$key]posisi")->dropDownList([ 'KETUA' => 'KETUA', 'WAKIL KETUA' => 'WAKIL KETUA',

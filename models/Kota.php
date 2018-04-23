@@ -84,7 +84,7 @@ class Kota extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Propinsi::className(), ['id_propinsi' => 'id_propinsi']);
     }
-    public function getDataBrowseKota($propinsi)
+    public static function getDataBrowseKota($propinsi)
     {        
      return ArrayHelper::map(
                      Kota::find()

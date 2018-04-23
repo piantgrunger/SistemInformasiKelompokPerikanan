@@ -4,10 +4,13 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Kelompok;
+use app\models\Anggota;
+
 use app\models\KelompokSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * KelompokController implements the CRUD actions for Kelompok model.
@@ -78,7 +81,10 @@ class KelompokController extends Controller
                 $transaction->rollBack();
                 throw $ecx;
             }
-     
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        
 
         } else {
             $model->id_propinsi = 35;
@@ -129,6 +135,22 @@ class KelompokController extends Controller
      * @param integer $id
      * @return mixed
      */
+
+    public function actionAnggota()
+    {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $jenis_anggota = $_POST['depdrop_parents'];
+            $out = Anggota::getDataBrowseAnggota($jenis_anggota); 
+            // the getDefaultSubCat function will query the database
+            // and return the default sub cat for the cat_id
+
+            echo Json::encode(['output' => $out, 'selected' => '']);
+            return;
+        }
+        echo Json::encode(['output' => '', 'selected' => '']);
+    }
+//
     public function actionDelete($id)
     {
         

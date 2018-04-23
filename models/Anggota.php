@@ -8,6 +8,9 @@ use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\web\UploadedFile;
+use yii\helpers\ArrayHelper;
+
+
 
 
 
@@ -237,6 +240,24 @@ public function getKelurahan()
 public function getNama_desa()
 {
     return ($this->kelurahan===null)?"":$this->kelurahan->nama_kelurahan;
+}
+
+public static function getDataBrowseAnggota($jenis_anggota)
+{        
+    $data=Anggota::find()
+    ->select([
+   'id'=>'id_anggota','name'=>"concat(nama_anggota,'-',nik)"
+   ])
+   ->where(['jenis_anggota'=>$jenis_anggota])
+   ->asArray()      
+   ->all();
+
+foreach ($data as $i => $list) 
+{
+$out[] = ['id' => $list['id'], 'name' => $list['name']];
+}
+return $out;  
+
 }
 
 }

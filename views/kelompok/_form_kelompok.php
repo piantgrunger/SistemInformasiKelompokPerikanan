@@ -18,6 +18,7 @@ use yii\bootstrap\Tabs;
 
     <?= $form->field($model, 'nama_kelompok')->textInput(['maxlength' => true]) ?>
 
+<?= $form->field($model, 'jenis_anggota')->dropDownList([ 'PENGOLAHAN' => 'PENGOLAHAN', 'BUDIDAYA' => 'BUDIDAYA', 'PRODUKSI GARAM' => 'PRODUKSI GARAM', ], ['prompt' => '']) ?>
 
 <?=  Html::activeHiddenInput($model, 'id_propinsi')?>	  
 
