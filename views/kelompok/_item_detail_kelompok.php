@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
      'data' =>ArrayHelper::map(
         Anggota::find()
                            ->select([
-                                   'id_anggota','nama_anggota'
+                                   'tb_m_anggota.id_anggota','nama_anggota'
                            ])
                            ->asArray()
                            ->all(), 'id_anggota', 'nama_anggota'),

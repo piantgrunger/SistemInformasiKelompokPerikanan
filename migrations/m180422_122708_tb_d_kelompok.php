@@ -1,3 +1,4 @@
+
 <?php
 
 use yii\db\Migration;
@@ -18,7 +19,7 @@ class m180422_122708_tb_d_kelompok extends Migration
             'id_d_kelompok' =>  $this->primaryKey(),
             
  
-            'id_anggota' =>  $this->integer()->notNull()->unique(),
+            'id_anggota' =>  $this->integer()->notNull(),
             'posisi' => "enum ('KETUA','WAKIL KETUA','BENDAHARA','SEKRETARIS','ANGGOTA')",   
             'created_at'=>$this->datetime(),
           'updated_at'=>$this->datetime(),

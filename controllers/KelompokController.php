@@ -112,7 +112,10 @@ class KelompokController extends Controller
                 $transaction->rollBack();
                 throw $ecx;
             }
-     
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+    
           } else {
             return $this->render('update', [
                 'model' => $model,
