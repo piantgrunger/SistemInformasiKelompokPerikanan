@@ -44,7 +44,7 @@ class AnggotaSearch extends Anggota
      */
     public function search($params)
     {
-        $query = Anggota::find()->select('tb_m_anggota.*, nama_kelurahan,nama_kecamatan as nama_desa')
+        $query = Anggota::find()->select('tb_m_anggota.*,nama_kecamatan, nama_kelurahan as nama_desa')
                 ->leftJoin('tb_m_kecamatan' , 'tb_m_kecamatan.id_kecamatan = tb_m_anggota.id_kecamatan')
                 ->leftJoin('tb_m_kelurahan' , 'tb_m_kelurahan.id_kelurahan = tb_m_anggota.id_kelurahan');
 

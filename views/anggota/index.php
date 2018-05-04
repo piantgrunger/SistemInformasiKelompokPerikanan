@@ -11,7 +11,10 @@ use app\models\Kecamatan;
 use app\models\Kelurahan;
 
 $gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
-            'nama_anggota',
+'kode_anggota',
+
+            
+'nama_anggota',
             'nik',
             'jenis_kelamin',
             [
@@ -34,6 +37,7 @@ $gridColumns=[['class' => 'kartik\grid\SerialColumn'],
                 'value'=>'nama_desa',
                
             ],
+            'nama_kelompok',
             // 'id_propinsi',
             // 'id_kota',
          //    'nama_kecamatan',

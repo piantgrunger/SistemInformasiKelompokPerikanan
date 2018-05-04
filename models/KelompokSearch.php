@@ -15,11 +15,14 @@ class KelompokSearch extends Kelompok
     /**
      * @inheritdoc
      */
+    public $nama_kecamatan;
+    public $nama_desa;
+   
     public function rules()
     {
         return [
             [['id_kelompok', 'id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan'], 'integer'],
-            [['nama_kelompok', 'tgl_pendirian', 'no_pengukuhan', 'tgl_pengukuhan', 'no_akte_notaris', 'tgl_akte_notaris', 'nama_notaris', 'tgl_mulai_usaha', 'no_telepon', 'no_rekening_bank', 'nama_bank', 'cabang', 'nama_pemilik_rekening', 'created_at', 'updated_at'], 'safe'],
+            [['nama_kelompok', 'tgl_pendirian', 'no_pengukuhan', 'tgl_pengukuhan', 'no_akte_notaris', 'tgl_akte_notaris', 'nama_notaris', 'tgl_mulai_usaha', 'no_telepon', 'no_rekening_bank', 'nama_bank', 'cabang', 'nama_pemilik_rekening', 'created_at', 'updated_at','jenis_anggota','nama_desa','nama_kecamatan'], 'safe'],
         ];
     }
 
@@ -41,7 +44,10 @@ class KelompokSearch extends Kelompok
      */
     public function search($params)
     {
-        $query = Kelompok::find();
+        $query = Kelompok::find()->select('tb_m_kelompok.*,nama_kecamatan, nama_kelurahan as nama_desa')
+        ->leftJoin('tb_m_kecamatan' , 'tb_m_kecamatan.id_kecamatan = tb_m_kelompok.id_kecamatan')
+        ->leftJoin('tb_m_kelurahan' , 'tb_m_kelurahan.id_kelurahan = tb_m_kelompok.id_kelurahan');
+;
 
         // add conditions that should always apply here
 
@@ -80,7 +86,14 @@ class KelompokSearch extends Kelompok
             ->andFilterWhere(['like', 'no_rekening_bank', $this->no_rekening_bank])
             ->andFilterWhere(['like', 'nama_bank', $this->nama_bank])
             ->andFilterWhere(['like', 'cabang', $this->cabang])
-            ->andFilterWhere(['like', 'nama_pemilik_rekening', $this->nama_pemilik_rekening]);
+            ->andFilterWhere(['like', 'nama_pemilik_rekening', $this->nama_pemilik_rekening])
+            ->andFilterWhere(['like', 'nama_kecamatan', $this->nama_kecamatan])
+            ->andFilterWhere(['like', 'nama_kelurahan', $this->nama_desa])   
+            ->andFilterWhere(['like', 'jenis_anggota', $this->jenis_anggota])
+            ;
+
+
+
 
         return $dataProvider;
     }

@@ -15,10 +15,11 @@ use yii\bootstrap\Tabs;
 /* @var $model app\models\Kelompok */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+    <?= $form->field($model, 'kode_kelompok')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'nama_kelompok')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'jenis_anggota')->dropDownList([ 'PENGOLAHAN' => 'PENGOLAHAN', 'BUDIDAYA' => 'BUDIDAYA', 'PRODUKSI GARAM' => 'PRODUKSI GARAM', ], ['prompt' => '']) ?>
+<?= $form->field($model, 'jenis_anggota')->dropDownList([ 'PENGOLAHAN' => 'PENGOLAHAN', 'BUDI DAYA' => 'BUDI DAYA', 'PRODUKSI GARAM' => 'PRODUKSI GARAM', ], ['prompt' => '']) ?>
 
 <?=  Html::activeHiddenInput($model, 'id_propinsi')?>	  
 

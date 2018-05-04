@@ -13,6 +13,8 @@ use kartik\datecontrol\DateControl;
 use yii\bootstrap\Tabs;
 ?>
 
+    <?= $form->field($model, 'kode_anggota')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'nama_anggota')->textInput(['maxlength' => true]) ?>
 
 <?= $form->field($model, 'nik')->textInput(['maxlength' => true]) ?>

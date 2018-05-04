@@ -86,6 +86,10 @@ class Detkelompok extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Anggota::className(), ['id_anggota' => 'id_anggota']);
     }
+    public function getNama_anggota()
+    {
+        return is_null($this->anggota)?"":$this->anggota->nama_anggota;
+    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -94,4 +98,9 @@ class Detkelompok extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Kelompok::className(), ['id_kelompok' => 'id_kelompok']);
     }
+    public function getNama_kelompok()
+    {
+        return is_null($this->kelompok)?"":$this->kelompok->nama_kelompok;
+    }
+
 }

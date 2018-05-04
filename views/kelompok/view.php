@@ -31,8 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'nama_kelompok',
             'tgl_pendirian',
-            'id_kecamatan',
-            'id_kelurahan',
+            'nama_kecamatan',
+            'nama_desa',
             'no_pengukuhan',
             'tgl_pengukuhan',
             'no_akte_notaris',
@@ -48,5 +48,30 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
         ],
     ]) ?>
+    <div class="panel panel-primary">
+<div class="panel-heading"> Data Anggota - Kelompok
 
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>Nama</th>
+            <th>Posisi</th>
+       
+        </tr>
+    </thead>
+    <?=  \mdm\widgets\TabularInput::widget([
+        'id' => 'detail-grid',
+        'allModels' => $model->detailKelompok,
+        'model' => \app\models\Detkelompok::className(),
+        'tag' => 'tbody',
+        'itemOptions' => ['tag' => 'tr'],
+        'itemView' => '_item_detail_kelompok_view',
+      
+    ]);
+?>
+</table>
+</div>
 </div>

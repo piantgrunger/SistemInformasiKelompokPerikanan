@@ -5,13 +5,11 @@ namespace app\controllers;
 use Yii;
 use app\models\Kelompok;
 use app\models\Anggota;
-
 use app\models\KelompokSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
-
 /**
  * KelompokController implements the CRUD actions for Kelompok model.
  */
@@ -71,20 +69,27 @@ class KelompokController extends Controller
             $transaction = Yii::$app->db->beginTransaction();
             try {
                 $model->detailKelompok = Yii::$app->request->post('Detkelompok', []);
-             
-                if ($model->save()) {
+               
+                if ($model->save() && count( $model->detailKelompok)>0) {
                     $transaction->commit();
                     return $this->redirect(['view', 'id' => $model->id_kelompok]);
                 }
                 $transaction->rollBack();
             } catch (\Exception $ecx) {
+              
                 $transaction->rollBack();
                 throw $ecx;
             }
+
+            if (count( $model->detailKelompok)==0)
+            {
+                $model->addError('kode_kelompok','Kelompok Harus Memiliki Anggota');
+            }
+         
             return $this->render('create', [
                 'model' => $model,
             ]);
-        
+     
 
         } else {
             $model->id_propinsi = 35;
@@ -108,8 +113,8 @@ class KelompokController extends Controller
             $transaction = Yii::$app->db->beginTransaction();
             try {
                 $model->detailKelompok = Yii::$app->request->post('Detkelompok', []);
-             
-                if ($model->save()) {
+                
+                if ($model->save() && count( $model->detailKelompok)>0) {
                     $transaction->commit();
                     return $this->redirect(['view', 'id' => $model->id_kelompok]);
                 }
@@ -118,6 +123,11 @@ class KelompokController extends Controller
                 $transaction->rollBack();
                 throw $ecx;
             }
+            if (count( $model->detailKelompok)==0)
+                {
+                    $model->addError('detailKelompok','Kelompok Harus Memiliki Anggota');
+                }
+             
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -135,13 +145,12 @@ class KelompokController extends Controller
      * @param integer $id
      * @return mixed
      */
-
     public function actionAnggota()
     {
         $out = [];
         if (isset($_POST['depdrop_parents'])) {
-            $jenis_anggota = $_POST['depdrop_parents'];
-            $out = Anggota::getDataBrowseAnggota($jenis_anggota); 
+            $id_propinsi = $_POST['depdrop_parents'];
+            $out = Anggota::getDataBrowseAnggota($id_propinsi); 
             // the getDefaultSubCat function will query the database
             // and return the default sub cat for the cat_id
 
@@ -150,7 +159,7 @@ class KelompokController extends Controller
         }
         echo Json::encode(['output' => '', 'selected' => '']);
     }
-//
+
     public function actionDelete($id)
     {
         

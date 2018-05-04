@@ -97,18 +97,19 @@ class Anggota extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama_anggota', 'nik', 'tempat_lahir', 'tgl_lahir', 'alamat', 'id_propinsi', 'id_kota', 'jml_anggota_keluarga'], 'required'],
+            [['kode_anggota','nama_anggota', 'nik', 'tempat_lahir', 'tgl_lahir', 'alamat', 'id_propinsi', 'id_kota', 'jml_anggota_keluarga'], 'required'],
             [['jenis_kelamin', 'jenis_anggota','golongan_darah', 
             'alamat', 'status_pernikahan', 'status_dalam_keluarga', 
             'pendidikan', 'status_kelompok_usaha', 'status_usaha',
              'perlindungan_asuransi', 'jenis_usaha', 'sarana_prasarana', 
-             'daerah_pemasaran','status_kelompok_budidaya','jenis_budidaya','nomor_sertifikat','npwp'], 'string'],
+             'daerah_pemasaran','status_kelompok_budidaya','jenis_budidaya','nomor_sertifikat','npwp',
+             'no_siup', 'no_situ', 'no_tdp', 'no_ho', 'no_izin_lainnya', 'no_skp', 'no_haccp', 'no_pirt', 'no_sni', 'no_sertifikat_lainnya'], 'string'],
             [['tgl_lahir', 'created_at', 'updated_at'], 'safe'],
             [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan', 'jml_anggota_keluarga', 'stat_siup', 'stat_situ', 'stat_tdp', 'stat_ho', 'stat_izin_lainnya', 'stat_skp', 'stat_haccp', 'stat_pirt', 'stat_sni', 'stat_sertifikat_lainnya', 'tahun_berdiri', 'jumlah_tenaga_kerja'], 'integer'],
             [['jumlah_bahan_baku_bulanan', 'jumlah_produksi_bulanan',
              'kapasitas_produksi_bulanan', 'pendapatan_bulanan', 'nilai_aset','luas_lahan','nilai_sertifikasi'], 'number'],
             [['nama_anggota', 'nik', 'tempat_lahir', 'jabatan_dalam_usaha', 'no_kontak_yang_bisa_dihubungi', 'jenis_bahan_baku', 'asal_bahan_baku'], 'string', 'max' => 255],
-            [['nik'], 'unique'],
+            [['nik','kode_anggota'], 'unique'],
             [['foto_anggota'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg','maxSize' => 512000000],
  
             [['status_kelompok_usaha', 'status_usaha', 'perlindungan_asuransi', 'jenis_usaha'],'required', 'when' => function($model) {
@@ -217,6 +218,18 @@ public function getKota()
 {
     return $this->hasOne(Kota::className(), ['id_kota' => 'id_kota']);
 }
+
+
+public function getKelompok()
+{
+    return $this->hasOne(Detkelompok::className(), ['id_anggota' => 'id_anggota']);
+}
+
+public function getNama_kelompok()
+{
+    return ($this->kelompok===null)?"": $this->kelompok->nama_kelompok;
+}
+
 
 /**
  * @return \yii\db\ActiveQuery

@@ -5,15 +5,36 @@ use hscstudio\mimin\components\Mimin;
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\widgets\Pjax; use kartik\export\ExportMenu;
+use yii\helpers\ArrayHelper;
+use app\models\Kecamatan;
+use app\models\Kelurahan;
+
 $gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
-            'nama_kelompok',
-            'jenis_anggota',
-            'tgl_pendirian:date',
-           // 'id_propinsi',
+'kode_kelompok',
+                  
+'nama_kelompok',
+[
+    'attribute'=>'jenis_anggota',
+    'value'=>'jenis_anggota',
+   
+    'filter'=>['PENGOLAHAN'=>'PENGOLAHAN','BUDI DAYA'=>'BUDI DAYA','PRODUKSI GARAM'=>'PRODUKSI GARAM']
+    ],
+ 'tgl_pendirian:date',
+          
+            // 'id_propinsi',
             //'id_kota',
-             'nama_kecamatan',
-             'nama_kelurahan',
-            'no_pengukuhan',
+            [
+                'attribute'=>'nama_kecamatan',
+                'value'=>'nama_kecamatan',
+               
+                'filter'=>ArrayHelper::map(Kecamatan::find()->where('id_kota=3523')->asArray()->all(),  'nama_kecamatan','nama_kecamatan')
+            ],
+            [
+                'attribute'=>'nama_desa',
+                'value'=>'nama_desa',
+               
+            ],
+             'no_pengukuhan',
 
              'tgl_pengukuhan:date',
             // 'no_akte_notaris',
@@ -69,5 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
          'resizableColumns'=>true,    
 
     ]); ?>
+
+
     <?php Pjax::end(); ?>
 </div>
