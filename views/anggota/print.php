@@ -107,10 +107,10 @@ $this->title = "DATA ANGGOTA KELOMPOK ".$model->jenis_anggota;
 ?>
 <div class="anggota-view">
 
-    <h3><?= Html::encode($this->title) ?></h3>
+    <h4><?= Html::encode($this->title) ?></h4>
     <div class="row">
 <div class="col-md-6 text-right"></div>
-<div class="col-md-6 text-right"><?=Html::img(Yii::$app->homeUrl.'image/'. $model->foto_anggota ,['width'=>'100px','height'=>'100px'])?>
+<div class="col-md-6 text-right"><?=Html::img(Yii::$app->homeUrl.'image/'. $model->foto_anggota ,['width'=>'80px','height'=>'80px'])?>
 </div>
 
 </div>
