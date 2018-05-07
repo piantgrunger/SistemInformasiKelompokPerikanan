@@ -9,12 +9,12 @@ class m170705_085255_create_tb_m_kelurahan extends Migration
     public function up()
     {
   $this->createTable(self::TABLE_NAME, [
-            
+
             'id_kelurahan' => $this->bigInteger()->notNull(),
        'id_kecamatan' => $this->integer()->notNull(),
             'nama_kelurahan' => $this->string(50)->notNull(),
-        
-             
+
+
 
         ]);
         $this->addPrimaryKey('pk_tb_kelurahan', $this::TABLE_NAME ,'id_kelurahan');
@@ -24,7 +24,7 @@ class m170705_085255_create_tb_m_kelurahan extends Migration
         'tb_m_kelurahan',
         'id_kecamatan'
         );
-        
+
         // add foreign key for table `provinsi`
         $this->addForeignKey(
         'fk-kelurahan-id_kecamatan',
@@ -34,8 +34,8 @@ class m170705_085255_create_tb_m_kelurahan extends Migration
         'id_kecamatan',
         'CASCADE'
         );
-      
-        // path tempat file csv berada 
+
+        // path tempat file csv berada
         $kelurahan = Yii::getAlias('@app/migrations/kelurahan.csv');
         // baca file csv menggunakan library league\csv
         $reader = Reader::createFromPath($kelurahan);
@@ -43,16 +43,16 @@ class m170705_085255_create_tb_m_kelurahan extends Migration
         //cek max_allowed_packet di my.ini
         $Rows = array();
         foreach ($reader as $index => $row) {
-            array_push($Rows, [ 
+            array_push($Rows, [
             $row[0],
-             (int)$row[1],
+             $row[1],
                   $row[2],
-              ]      
+              ]
         );
-            
+
         }
          $this->batchInsert($this::TABLE_NAME,['id_kelurahan','id_kecamatan','nama_kelurahan'] , $Rows);
-       
+
     }
 
     public function down()

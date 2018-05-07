@@ -7,6 +7,7 @@ use hscstudio\mimin\components\Mimin;
 /* @var $this yii\web\View */
 /* @var $model app\models\Anggota */
 $attributes=[
+    'kode_anggota',
     'nama_anggota',
     'nik',
     'jenis_kelamin',
@@ -26,26 +27,26 @@ $attributes=[
 if( $model->jenis_anggota == 'PENGOLAHAN')
 {
     $attributes1=[
- 
-        
+
+
         'status_kelompok_usaha',
-  
+
         'status_usaha',
      'jabatan_dalam_usaha',
      'perlindungan_asuransi',
      'no_kontak_yang_bisa_dihubungi',
-     
-     'stat_siup',
-   'stat_situ',
-   'stat_tdp',
-   'stat_ho',
-   'stat_izin_lainnya',
-   'stat_skp',
-   'stat_haccp',
-   'stat_pirt',
-   'stat_sni',
-   
-   'stat_sertifikat_lainnya',
+
+     'no_siup',
+   'no_situ',
+   'no_tdp',
+   'no_ho',
+   'no_izin_lainnya',
+   'no_skp',
+   'no_haccp',
+   'no_pirt',
+   'no_sni',
+
+   'no_sertifikat_lainnya',
    'tahun_berdiri',
    'jenis_usaha',
    'jenis_bahan_baku',
@@ -57,9 +58,9 @@ if( $model->jenis_anggota == 'PENGOLAHAN')
    'nilai_aset',
    'sarana_prasarana',
    'jumlah_tenaga_kerja',
-     
+
    'daerah_pemasaran'
-   
+
 ];
 }else
 if( $model->jenis_anggota == 'BUDI DAYA')
@@ -72,14 +73,14 @@ if( $model->jenis_anggota == 'BUDI DAYA')
     'nilai_sertifikasi',
     'nomor_sertifikat',
     'npwp',
-         
+
 ];
 }else
 if( $model->jenis_anggota == 'PRODUKSI GARAM')
 {
-    $attributes1=[ 
+    $attributes1=[
     'no_kontak_yang_bisa_dihubungi',
-    
+
   'tahun_berdiri',
   'jenis_usaha',
   'jumlah_produksi_bulanan',
@@ -89,11 +90,11 @@ if( $model->jenis_anggota == 'PRODUKSI GARAM')
   'sarana_prasarana',
   'jumlah_tenaga_kerja',
   'daerah_pemasaran',
-  
+
   'lokasi_lahan',
   'luas_lahan',
   'status_lahan',
- 
+
   'tekhnologi_digunakan',
   'kualitas_produksi',
 

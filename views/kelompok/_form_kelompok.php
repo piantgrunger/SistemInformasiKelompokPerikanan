@@ -15,15 +15,16 @@ use yii\bootstrap\Tabs;
 /* @var $model app\models\Kelompok */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-    <?= $form->field($model, 'kode_kelompok')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'nama_kelompok')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'jenis_anggota')->dropDownList([ 'PENGOLAHAN' => 'PENGOLAHAN', 'BUDI DAYA' => 'BUDI DAYA', 'PRODUKSI GARAM' => 'PRODUKSI GARAM', ], ['prompt' => '']) ?>
+<?= $form->field($model, 'jenis_anggota')->dropDownList([ 'PENGOLAHAN' => 'PENGOLAHAN', 'BUDI DAYA' => 'BUDI DAYA', 'PRODUKSI GARAM' => 'PRODUKSI GARAM', ], ['prompt' => ''])
+  ->label('Jenis Kelompok');
+?>
 
-<?=  Html::activeHiddenInput($model, 'id_propinsi')?>	  
+<?=  Html::activeHiddenInput($model, 'id_propinsi')?>
 
-<?= Html::activeHiddenInput($model, 'id_kota') ?>	  
+<?= Html::activeHiddenInput($model, 'id_kota') ?>
 
     <?= $form->field($model, 'tgl_pendirian')->widget(DateControl::classname()) ?>
 
@@ -37,7 +38,7 @@ use yii\bootstrap\Tabs;
     'url'=>Url::to(['/anggota/kecamatan']),
     'placeholder'=>'Pilih Kecamatan ...',
     'initialize' =>true,
-    
+
     ]
 ])->label('Kecamatan'); ?>
 
@@ -52,9 +53,9 @@ use yii\bootstrap\Tabs;
     'url'=>Url::to(['/anggota/kelurahan']),
     'placeholder'=>'Pilih kelurahan ...',
     'initialize' =>true,
-    
+
     ]
-])->label('Desa'); ?>	
+])->label('Desa'); ?>
     <?= $form->field($model, 'no_pengukuhan')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'tgl_pengukuhan')->widget(DateControl::classname())  ?>
@@ -76,4 +77,3 @@ use yii\bootstrap\Tabs;
     <?= $form->field($model, 'cabang')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'nama_pemilik_rekening')->textInput(['maxlength' => true]) ?>
-
