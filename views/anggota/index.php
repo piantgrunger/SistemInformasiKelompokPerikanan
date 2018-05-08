@@ -11,12 +11,10 @@ use app\models\Kecamatan;
 use app\models\Kelurahan;
 
 $gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
-'kode_anggota',
 
             
 'nama_anggota',
             'nik',
-            'jenis_kelamin',
             [
             'attribute'=>'jenis_anggota',
             'value'=>'jenis_anggota',

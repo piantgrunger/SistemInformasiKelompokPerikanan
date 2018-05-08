@@ -7,7 +7,7 @@ use hscstudio\mimin\components\Mimin;
 /* @var $this yii\web\View */
 /* @var $model app\models\Anggota */
 $attributes=[
-    'kode_anggota',
+
     'nama_anggota',
     'nik',
     'jenis_kelamin',

@@ -97,7 +97,7 @@ class Anggota extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['kode_anggota','nama_anggota', 'nik', 'tempat_lahir', 'tgl_lahir', 'alamat', 'id_propinsi', 'id_kota', 'jml_anggota_keluarga'], 'required'],
+            [['nama_anggota', 'nik', 'tempat_lahir','tgl_lahir' , 'alamat', 'id_propinsi', 'id_kota', 'jml_anggota_keluarga'], 'required'],
             [['jenis_kelamin', 'jenis_anggota','golongan_darah', 
             'alamat', 'status_pernikahan', 'status_dalam_keluarga', 
             'pendidikan', 'status_kelompok_usaha', 'status_usaha',
@@ -109,7 +109,7 @@ class Anggota extends \yii\db\ActiveRecord
             [['jumlah_bahan_baku_bulanan', 'jumlah_produksi_bulanan',
              'kapasitas_produksi_bulanan', 'pendapatan_bulanan', 'nilai_aset','luas_lahan','nilai_sertifikasi'], 'number'],
             [['nama_anggota', 'nik', 'tempat_lahir', 'jabatan_dalam_usaha', 'no_kontak_yang_bisa_dihubungi', 'jenis_bahan_baku', 'asal_bahan_baku'], 'string', 'max' => 255],
-            [['nik','kode_anggota'], 'unique'],
+            [['nik'], 'unique'],
             [['foto_anggota'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg','maxSize' => 512000000],
  
             [['status_kelompok_usaha', 'status_usaha', 'perlindungan_asuransi', 'jenis_usaha'],'required', 'when' => function($model) {
@@ -122,6 +122,7 @@ class Anggota extends \yii\db\ActiveRecord
             [[ 'status_lahan','tekhnologi_digunakan','kualitas_produksi'],'required', 'when' => function($model) {
                 return $model->jenis_anggota == 'PRODUKSI GARAM';
             }],
+          [['nik'],'checkNIK']
            
         ];
     }
@@ -180,6 +181,16 @@ class Anggota extends \yii\db\ActiveRecord
         ];
     }
 
+    public function checkNIK($attribute, $params)
+    {
+        // no real check at the moment to be sure that the error is triggered
+      $pos = substr($this->nik, 0,4);
+       if ((strlen($this->nik) !== 16)||($pos!=='3523') )
+       {  
+          $this->addError($attribute,'Format NIK Harus 16 digit dan diawali 3523');
+          return false;          
+       }  
+    }
     public function upload()
     {
         $path =Yii::getAlias('@app').'/web/image/';
