@@ -10,7 +10,7 @@ use app\models\Kecamatan;
 use app\models\Kelurahan;
 
 $gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
-'kode_kelompok',
+
                   
 'nama_kelompok',
 [

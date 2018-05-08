@@ -169,5 +169,10 @@ use kartik\datecontrol\DateControl;
 <?= $form->field($model, 'jumlah_tenaga_kerja')->textInput() ?>
 
 <?= $form->field($model, 'daerah_pemasaran')->textarea(['rows' => 6]) ?>
+  
+  
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
 
 </div>

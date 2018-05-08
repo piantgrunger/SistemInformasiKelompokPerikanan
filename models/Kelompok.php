@@ -72,7 +72,7 @@ class Kelompok extends \yii\db\ActiveRecord
             [['tgl_pendirian', 'tgl_pengukuhan', 'tgl_akte_notaris', 'tgl_mulai_usaha', 'created_at', 'updated_at'], 'safe'],
             [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan'], 'integer'],
             [['nama_kelompok', 'no_pengukuhan', 'no_akte_notaris', 'nama_notaris', 'no_telepon', 'no_rekening_bank', 'nama_bank', 'cabang', 'nama_pemilik_rekening'], 'string', 'max' => 255],
-            [['no_pengukuhan','kode_kelompok'], 'unique'],
+            [['no_pengukuhan'], 'unique'],
         ];
     }
 

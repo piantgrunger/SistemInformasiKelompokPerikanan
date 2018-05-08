@@ -46,5 +46,10 @@ use kartik\datecontrol\DateControl;
 
 <?= $form->field($model, 'tekhnologi_digunakan')->dropDownList([ 'INTENSIF' => 'INTENSIF', 'TRADISIONAL' => 'TRADISIONAL' ], ['prompt' => '']) ?>
 <?= $form->field($model, 'kualitas_produksi')->dropDownList([ 'KP1' => 'KP1', 'KP2' => 'KP2' ], ['prompt' => '']) ?>
+  
+  
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
 
 </div>
