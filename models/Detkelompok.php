@@ -58,7 +58,7 @@ class Detkelompok extends \yii\db\ActiveRecord
             [['id_kelompok', 'id_anggota'], 'integer'],
             [['posisi'], 'string'],
             [['id_kelompok','created_at', 'updated_at'], 'safe'],
-            [['id_anggota'], 'unique','message' => 'Ada Anggota yang sudah Memiliki Kelompok'],
+            [['id_anggota'], 'cekAnggota'],
             [['id_anggota'], 'exist', 'skipOnError' => true, 'targetClass' => Anggota::className(), 'targetAttribute' => ['id_anggota' => 'id_anggota']],
             [['id_kelompok'], 'exist', 'skipOnError' => true, 'targetClass' => Kelompok::className(), 'targetAttribute' => ['id_kelompok' => 'id_kelompok']],
         ];
@@ -101,6 +101,18 @@ class Detkelompok extends \yii\db\ActiveRecord
     public function getNama_kelompok()
     {
         return is_null($this->kelompok)?"":$this->kelompok->nama_kelompok;
+    }
+    public function cekAnggota($attribute, $params)
+    {
+      $kelompok = Detkelompok::find()->where('id_anggota='.$this->id_anggota)
+                      ->andWhere('id_kelompok<>'.$this->id_kelompok)->one();
+      if(!is_null($kelompok))
+      {
+           $this->addError($attribute,$this->nama_anggota.' Sudah Menjadi Anggota Kelompok '.$kelompok->nama_kelompok);
+          return false;          
+      
+      }  
+  
     }
 
 }
