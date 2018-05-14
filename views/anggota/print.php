@@ -68,9 +68,9 @@ if( $model->jenis_anggota == 'BUDI DAYA')
     $attributes1=[
     'status_kelompok_budidaya',
     'jenis_budidaya',
-    'luas_lahan',
+    'luas_lahan:decimal',
     'status_sertifikasi_cbib_cpib',
-    'nilai_sertifikasi',
+    'nilai_sertifikasi:decimal',
     'nomor_sertifikat',
     'npwp',
 
@@ -82,7 +82,6 @@ if( $model->jenis_anggota == 'PRODUKSI GARAM')
     'no_kontak_yang_bisa_dihubungi',
 
   'tahun_berdiri',
-  'jenis_usaha',
   'jumlah_produksi_bulanan:decimal',
   'kapasitas_produksi_bulanan:decimal',
   'pendapatan_bulanan:currency',
@@ -92,7 +91,7 @@ if( $model->jenis_anggota == 'PRODUKSI GARAM')
   'daerah_pemasaran',
 
   'lokasi_lahan',
-  'luas_lahan',
+  'luas_lahan:decimal',
   'status_lahan',
 
   'tekhnologi_digunakan',

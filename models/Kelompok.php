@@ -84,6 +84,8 @@ class Kelompok extends \yii\db\ActiveRecord
         return [
             'id_kelompok' => Yii::t('app', 'Id Kelompok'),
             'nama_kelompok' => Yii::t('app', 'Nama Kelompok'),
+            'jenis_anggota' => Yii::t('app', 'Jenis Kelompok'),
+          
             'tgl_pendirian' => Yii::t('app', 'Tgl Pendirian'),
             'id_propinsi' => Yii::t('app', 'Id Propinsi'),
             'id_kota' => Yii::t('app', 'Id Kota'),

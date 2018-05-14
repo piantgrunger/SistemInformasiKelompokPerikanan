@@ -10,6 +10,7 @@ use mdm\widgets\TabularInput;
 
 
 
+
 ?>
 <div class="panel panel-primary">
 <div class="panel-heading"> Data Anggota - Kelompok
@@ -42,4 +43,6 @@ use mdm\widgets\TabularInput;
 </table>
 
 </div>
+ <div class="form-group">
+        <?= \Yii\helpers\Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
 

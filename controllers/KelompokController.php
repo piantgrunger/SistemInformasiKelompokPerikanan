@@ -10,11 +10,13 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
+use app\helpers\Helper;
 /**
  * KelompokController implements the CRUD actions for Kelompok model.
  */
 class KelompokController extends Controller
 {
+  
     /**
      * @inheritdoc
      */
@@ -70,7 +72,8 @@ class KelompokController extends Controller
             try {
                 $model->detailKelompok = Yii::$app->request->post('Detkelompok', []);
                
-                if ($model->save() && count( $model->detailKelompok)>0) {
+                if (($model->save()) && (count( $model->detailKelompok)>0)
+                   &&(Helper:: my_array_unique($model->detailKelompok,'id_anggota'))) {
                     $transaction->commit();
                     return $this->redirect(['view', 'id' => $model->id_kelompok]);
                 }
@@ -83,9 +86,16 @@ class KelompokController extends Controller
 
             if (count( $model->detailKelompok)==0)
             {
-                $model->addError('kode_kelompok','Kelompok Harus Memiliki Anggota');
+                $model->addError('detailKelompok','Kelompok Harus Memiliki Anggota');
             }
+           
+           if (!Helper:: my_array_unique($model->detailKelompok,'id_anggota'))
+           {
+                $model->addError('detailKelompok','Anggota Tidak Boleh Kembar ');
+                  
+           }    
          
+                    
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -110,11 +120,15 @@ class KelompokController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) ) {
+          
             $transaction = Yii::$app->db->beginTransaction();
             try {
                 $model->detailKelompok = Yii::$app->request->post('Detkelompok', []);
                 
-                if ($model->save() && count( $model->detailKelompok)>0) {
+                if (($model->save()) && (count( $model->detailKelompok)>0)
+                  &&(Helper:: my_array_unique($model->detailKelompok,'id_anggota')
+                     ))
+                       {
                     $transaction->commit();
                     return $this->redirect(['view', 'id' => $model->id_kelompok]);
                 }
@@ -127,6 +141,11 @@ class KelompokController extends Controller
                 {
                     $model->addError('detailKelompok','Kelompok Harus Memiliki Anggota');
                 }
+             if (!Helper:: my_array_unique($model->detailKelompok,'id_anggota'))
+           {
+                $model->addError('detailKelompok','Anggota Tidak Boleh Kembar ');
+                  
+           }    
              
             return $this->render('update', [
                 'model' => $model,

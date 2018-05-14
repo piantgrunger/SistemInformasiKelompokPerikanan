@@ -30,6 +30,29 @@ class Helper
 		}     
 		return $temp;
 	}
+  
+  
+
+ public static function my_array_unique($array, $field)
+{
+    $duplicate_keys = array();
+    $tmp         = array();       
+   $keep_key_assoc=false;
+
+    foreach ($array as $key=>$val)
+    {
+        // convert objects to arrays, in_array() does not support objects
+        if (is_object($val))
+            $val = (array)$val[$field];
+
+        if (!in_array($val, $tmp))
+            $tmp[] = $val;
+        else
+            $duplicate_keys[] = $key;
+    }
+
+    return count($duplicate_keys)==0;
+}
  
 	
  
