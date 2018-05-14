@@ -34,9 +34,13 @@ $gridColumns=[['class' => 'kartik\grid\SerialColumn'],
                 'value'=>'nama_desa',
                
             ],
-             'no_pengukuhan',
-
-             'tgl_pengukuhan:date',
+             [
+                'attribute'=>'kelas_kelompok',
+                'value'=>'kelas_kelompok',
+               
+                'filter'=>[ 'Pemula'=>'Pemula','Madya'=>'Madya','Utama'=>'Utama']
+            ],
+            'nilai_kelompok',
             // 'no_akte_notaris',
             // 'tgl_akte_notaris',
             // 'nama_notaris',

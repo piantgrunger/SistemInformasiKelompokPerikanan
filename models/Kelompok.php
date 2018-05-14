@@ -68,17 +68,41 @@ class Kelompok extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama_kelompok', 'tgl_pendirian', 'id_propinsi', 'id_kota', 'no_pengukuhan', 'tgl_pengukuhan', 'tgl_mulai_usaha','jenis_anggota',], 'required'],
+            [['nama_kelompok', 'tgl_pendirian', 'id_propinsi', 'id_kota', 'no_pengukuhan', 'tgl_pengukuhan', 'tgl_mulai_usaha','jenis_anggota','kelas_kelompok','nilai_kelompok',], 'required'],
             [['tgl_pendirian', 'tgl_pengukuhan', 'tgl_akte_notaris', 'tgl_mulai_usaha', 'created_at', 'updated_at'], 'safe'],
-            [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan'], 'integer'],
+            [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan','nilai_kelompok'], 'integer'],
             [['nama_kelompok', 'no_pengukuhan', 'no_akte_notaris', 'nama_notaris', 'no_telepon', 'no_rekening_bank', 'nama_bank', 'cabang', 'nama_pemilik_rekening'], 'string', 'max' => 255],
             [['no_pengukuhan'], 'unique'],
+            [['nilai_kelompok'],'cekNilai'],
         ];
     }
 
     /**
      * @inheritdoc
      */
+    public function cekNilai($attribute, $params)
+    {
+           if ($this->kelas_kelompok === 'Pemula' && !($this->nilai_kelompok>=0 && $this->nilai_kelompok<=350 ))
+           {
+             $this->addError($attribute,'Kelompok Pemula hanya boleh berada pada range nilai 0-350');
+             return false;          
+      
+           }
+           else
+           if ($this->kelas_kelompok === 'Madya' && !($this->nilai_kelompok>=351 && $this->nilai_kelompok<=650 ))
+           {
+             $this->addError($attribute,'Kelompok Madya hanya boleh berada pada range nilai 351-650');
+             return false;          
+      
+           }
+           else
+           if ($this->kelas_kelompok === 'Utama' && !($this->nilai_kelompok>=651 && $this->nilai_kelompok<=1000 ))
+           {
+             $this->addError($attribute,'Kelompok Utama hanya berada pada range nilai 651-1000');
+             return false;          
+      
+           }
+    }
     public function attributeLabels()
     {
         return [
@@ -121,6 +145,14 @@ public function getDetailKelompok()
 public function setDetailKelompok($value)
 {
     return $this->loadRelated('detailKelompok',$value);
+}
+public function getDetailKelompokBantuan()
+{
+    return $this->hasMany(Detkelompokbantuan::className(), ['id_kelompok' => 'id_kelompok']);
+}
+public function setDetailKelompokBantuan($value)
+{
+    return $this->loadRelated('detailKelompokBantuan',$value);
 }
 
 /**

@@ -71,6 +71,7 @@ class KelompokController extends Controller
             $transaction = Yii::$app->db->beginTransaction();
             try {
                 $model->detailKelompok = Yii::$app->request->post('Detkelompok', []);
+                $model->detailKelompokBantuan = Yii::$app->request->post('Detkelompokbantuan', []);
                
                 if (($model->save()) && (count( $model->detailKelompok)>0)
                    &&(Helper:: my_array_unique($model->detailKelompok,'id_anggota'))) {
@@ -124,6 +125,7 @@ class KelompokController extends Controller
             $transaction = Yii::$app->db->beginTransaction();
             try {
                 $model->detailKelompok = Yii::$app->request->post('Detkelompok', []);
+                $model->detailKelompokBantuan = Yii::$app->request->post('Detkelompokbantuan', []);
                 
                 if (($model->save()) && (count( $model->detailKelompok)>0)
                   &&(Helper:: my_array_unique($model->detailKelompok,'id_anggota')

@@ -77,3 +77,8 @@ use yii\bootstrap\Tabs;
     <?= $form->field($model, 'cabang')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'nama_pemilik_rekening')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'kelas_kelompok')->dropDownList([ 'Pemula'=>'Pemula','Madya'=>'Madya','Utama'=>'Utama'], ['prompt' => '']);?>
+
+<?= $form->field($model, 'nilai_kelompok')->textInput(['maxlength' => true]) ?>
+

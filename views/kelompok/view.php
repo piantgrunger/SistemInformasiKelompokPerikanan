@@ -73,5 +73,37 @@ $this->params['breadcrumbs'][] = $this->title;
     ]);
 ?>
 </table>
+
+
 </div>
+
+    <div class="panel panel-primary">
+<div class="panel-heading"> Data Bantuan - Kelompok
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>Tahun</th>
+            <th>Bantuan</th>
+       
+        </tr>
+    </thead>
+    <?=  \mdm\widgets\TabularInput::widget([
+        'id' => 'detail-grid',
+        'allModels' => $model->detailKelompokBantuan,
+        'model' => \app\models\Detkelompokbantuan::className(),
+        'tag' => 'tbody',
+        'itemOptions' => ['tag' => 'tr'],
+        'itemView' => '_item_detail_kelompok_view_bantuan',
+      
+    ]);
+?>
+</table>
+
+
+</div>
+
 </div>

@@ -6,6 +6,6 @@ return [
     'dsn' => 'mysql:host=localhost;dbname=db_sikp',
     'username' => 'root',
 
-    'password' => 'Alfian1234',
+    'password' => '7669675',
     'charset' => 'utf8',
 ];

@@ -133,9 +133,11 @@ class Anggota extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'jenis_anggota' => Yii::t('app', 'Jenis Kelompok'),
+    
             'id_anggota' => Yii::t('app', 'Id Anggota'),
             'nama_anggota' => Yii::t('app', 'Nama Anggota'),
-            'nik' => Yii::t('app', 'Nik'),
+            'nik' => Yii::t('app', 'NIK'),
             'jenis_kelamin' => Yii::t('app', 'Jenis Kelamin'),
             'tempat_lahir' => Yii::t('app', 'Tempat Lahir'),
             'tgl_lahir' => Yii::t('app', 'Tgl Lahir'),

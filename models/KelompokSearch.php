@@ -22,7 +22,7 @@ class KelompokSearch extends Kelompok
     {
         return [
             [['id_kelompok', 'id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan'], 'integer'],
-            [['nama_kelompok', 'tgl_pendirian', 'no_pengukuhan', 'tgl_pengukuhan', 'no_akte_notaris', 'tgl_akte_notaris', 'nama_notaris', 'tgl_mulai_usaha', 'no_telepon', 'no_rekening_bank', 'nama_bank', 'cabang', 'nama_pemilik_rekening', 'created_at', 'updated_at','jenis_anggota','nama_desa','nama_kecamatan'], 'safe'],
+            [['nama_kelompok', 'tgl_pendirian', 'no_pengukuhan', 'tgl_pengukuhan', 'no_akte_notaris', 'tgl_akte_notaris', 'nama_notaris', 'tgl_mulai_usaha', 'no_telepon', 'no_rekening_bank', 'nama_bank', 'cabang', 'nama_pemilik_rekening', 'created_at', 'updated_at','jenis_anggota','nama_desa','nama_kecamatan','kelas_kelompok','nilai_kelompok'], 'safe'],
         ];
     }
 
@@ -90,6 +90,9 @@ class KelompokSearch extends Kelompok
             ->andFilterWhere(['like', 'nama_kecamatan', $this->nama_kecamatan])
             ->andFilterWhere(['like', 'nama_kelurahan', $this->nama_desa])   
             ->andFilterWhere(['like', 'jenis_anggota', $this->jenis_anggota])
+            ->andFilterWhere(['like', 'kelas_kelompok', $this->kelas_kelompok])
+            ->andFilterWhere(['like', 'nilai_kelompok', $this->nilai_kelompok])
+            
             ;
 
 
