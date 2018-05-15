@@ -56,10 +56,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <table class="table">
     <thead>
         <tr>
-            
+
             <th>Nama</th>
             <th>Posisi</th>
-       
+
         </tr>
     </thead>
     <?=  \mdm\widgets\TabularInput::widget([
@@ -69,13 +69,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'tag' => 'tbody',
         'itemOptions' => ['tag' => 'tr'],
         'itemView' => '_item_detail_kelompok_view',
-      
+
     ]);
 ?>
 </table>
 
 
 </div>
+
+<?php if ($model->status_bantuan=="Sudah") { ?>
 
     <div class="panel panel-primary">
 <div class="panel-heading"> Data Bantuan - Kelompok
@@ -85,10 +87,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <table class="table">
     <thead>
         <tr>
-            
+
             <th>Tahun</th>
             <th>Bantuan</th>
-       
+
         </tr>
     </thead>
     <?=  \mdm\widgets\TabularInput::widget([
@@ -98,12 +100,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'tag' => 'tbody',
         'itemOptions' => ['tag' => 'tr'],
         'itemView' => '_item_detail_kelompok_view_bantuan',
-      
+
     ]);
 ?>
 </table>
 
 
 </div>
-
+    <?php }?>
 </div>

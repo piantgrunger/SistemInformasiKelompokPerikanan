@@ -1,4 +1,4 @@
-<?
+<?php
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -9,8 +9,35 @@ use kartik\select2\Select2;
 use mdm\widgets\TabularInput;
 
 
+$js=<<<JS
+
+  $(document).ready(function()
+    {
+
+  if ($("#kelompok-status_bantuan") . val() === "Sudah") {
+    document.getElementById("databantuan").style.display="block";
 
 
+} else {
+    document.getElementById("databantuan").style.display="none";
+
+}
+    });
+
+    $("#kelompok-status_bantuan") . on("change", function (e)
+    {
+
+  if ($("#kelompok-status_bantuan") . val() === "Sudah") {
+    document.getElementById("databantuan").style.display="block";
+
+
+} else {
+    document.getElementById("databantuan").style.display="none";
+
+}
+    });
+JS;
+$this->registerJS($js);
 ?>
 <div class="panel panel-primary">
 <div class="panel-heading"> Data Anggota - Kelompok
@@ -19,10 +46,10 @@ use mdm\widgets\TabularInput;
 <table class="table">
     <thead>
         <tr>
-            
+
             <th>Nama</th>
             <th>Posisi</th>
-       
+
             <th><a id="btn-add" href="#"><span class="glyphicon glyphicon-plus"></span></a></th>
         </tr>
     </thead>
@@ -42,17 +69,22 @@ use mdm\widgets\TabularInput;
 ?>
 </table>
 </div>
-<div class="panel panel-primary">
+
+<?= $form->field($model, 'status_bantuan')-> dropDownList(['Sudah' => 'Sudah', 'Belum' => 'Belum', ], ['prompt' => '',
+ ])
+?>
+
+<div class="panel panel-primary" id="databantuan"  >
 <div class="panel-heading"> Data Bantuan - Kelompok
 
 </div>
 <table class="table">
     <thead>
         <tr>
-            
+
             <th>Tahun</th>
             <th>Bantuan</th>
-       
+
             <th><a id="btn-add2" href="#"><span class="glyphicon glyphicon-plus"></span></a></th>
         </tr>
     </thead>
@@ -75,4 +107,3 @@ use mdm\widgets\TabularInput;
 </div>
  <div class="form-group">
         <?= \Yii\helpers\Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
-

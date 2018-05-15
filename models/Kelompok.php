@@ -68,7 +68,7 @@ class Kelompok extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama_kelompok', 'tgl_pendirian', 'id_propinsi', 'id_kota', 'no_pengukuhan', 'tgl_pengukuhan', 'tgl_mulai_usaha','jenis_anggota','kelas_kelompok','nilai_kelompok',], 'required'],
+            [['nama_kelompok', 'tgl_pendirian', 'id_propinsi', 'id_kota', 'no_pengukuhan', 'tgl_pengukuhan', 'tgl_mulai_usaha','jenis_anggota','kelas_kelompok','nilai_kelompok','status_bantuan'], 'required'],
             [['tgl_pendirian', 'tgl_pengukuhan', 'tgl_akte_notaris', 'tgl_mulai_usaha', 'created_at', 'updated_at'], 'safe'],
             [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan','nilai_kelompok'], 'integer'],
             [['nama_kelompok', 'no_pengukuhan', 'no_akte_notaris', 'nama_notaris', 'no_telepon', 'no_rekening_bank', 'nama_bank', 'cabang', 'nama_pemilik_rekening'], 'string', 'max' => 255],
@@ -85,22 +85,22 @@ class Kelompok extends \yii\db\ActiveRecord
            if ($this->kelas_kelompok === 'Pemula' && !($this->nilai_kelompok>=0 && $this->nilai_kelompok<=350 ))
            {
              $this->addError($attribute,'Kelompok Pemula hanya boleh berada pada range nilai 0-350');
-             return false;          
-      
+             return false;
+
            }
            else
            if ($this->kelas_kelompok === 'Madya' && !($this->nilai_kelompok>=351 && $this->nilai_kelompok<=650 ))
            {
              $this->addError($attribute,'Kelompok Madya hanya boleh berada pada range nilai 351-650');
-             return false;          
-      
+             return false;
+
            }
            else
            if ($this->kelas_kelompok === 'Utama' && !($this->nilai_kelompok>=651 && $this->nilai_kelompok<=1000 ))
            {
              $this->addError($attribute,'Kelompok Utama hanya berada pada range nilai 651-1000');
-             return false;          
-      
+             return false;
+
            }
     }
     public function attributeLabels()
@@ -109,7 +109,7 @@ class Kelompok extends \yii\db\ActiveRecord
             'id_kelompok' => Yii::t('app', 'Id Kelompok'),
             'nama_kelompok' => Yii::t('app', 'Nama Kelompok'),
             'jenis_anggota' => Yii::t('app', 'Jenis Kelompok'),
-          
+
             'tgl_pendirian' => Yii::t('app', 'Tgl Pendirian'),
             'id_propinsi' => Yii::t('app', 'Id Propinsi'),
             'id_kota' => Yii::t('app', 'Id Kota'),
@@ -130,8 +130,8 @@ class Kelompok extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
-    
-    
+
+
 
 public function getPropinsi()
 {
