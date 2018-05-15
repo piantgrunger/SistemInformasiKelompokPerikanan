@@ -9,38 +9,43 @@ use yii\helpers\ArrayHelper;
 use app\models\Kecamatan;
 use app\models\Kelurahan;
 
-$gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
+$gridColumns=[['class' => 'kartik\grid\SerialColumn'],
 
-                  
+
 'nama_kelompok',
 [
     'attribute'=>'jenis_anggota',
     'value'=>'jenis_anggota',
-   
+
     'filter'=>['PENGOLAHAN'=>'PENGOLAHAN','BUDI DAYA'=>'BUDI DAYA','PRODUKSI GARAM'=>'PRODUKSI GARAM']
     ],
  'tgl_pendirian:date',
-          
+
             // 'id_propinsi',
             //'id_kota',
             [
                 'attribute'=>'nama_kecamatan',
                 'value'=>'nama_kecamatan',
-               
+
                 'filter'=>ArrayHelper::map(Kecamatan::find()->where('id_kota=3523')->asArray()->all(),  'nama_kecamatan','nama_kecamatan')
             ],
             [
                 'attribute'=>'nama_desa',
                 'value'=>'nama_desa',
-               
+
             ],
              [
                 'attribute'=>'kelas_kelompok',
                 'value'=>'kelas_kelompok',
-               
+
                 'filter'=>[ 'Pemula'=>'Pemula','Madya'=>'Madya','Utama'=>'Utama']
             ],
-            'nilai_kelompok',
+    [
+        'attribute' => 'status_bantuan',
+        'value' => 'status_bantuan',
+
+        'filter' => ['Belum' => 'Belum', 'Sudah' => 'Sudah']
+    ],
             // 'no_akte_notaris',
             // 'tgl_akte_notaris',
             // 'nama_notaris',
@@ -76,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'columns' => $gridColumns,       
+        'columns' => $gridColumns,
         'tableOptions' => ['class' => 'table  table-bordered table-hover'],
         'striped'=>false,
         'containerOptions'=>[true],
@@ -89,9 +94,9 @@ $this->params['breadcrumbs'][] = $this->title;
            'showPageSummary' => true,
         'panel' => [
             'type' => GridView::TYPE_PRIMARY
-      
-        ],  
-         'resizableColumns'=>true,    
+
+        ],
+         'resizableColumns'=>true,
 
     ]); ?>
 
