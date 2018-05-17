@@ -4,47 +4,59 @@
 use hscstudio\mimin\components\Mimin;
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use yii\widgets\Pjax; use kartik\export\ExportMenu;
+use yii\widgets\Pjax;
+use kartik\export\ExportMenu;
 use yii\helpers\ArrayHelper;
 use app\models\Kecamatan;
 use app\models\Kelurahan;
 
-$gridColumns=[['class' => 'kartik\grid\SerialColumn'],
+$gridColumns = [
+    ['class' => 'kartik\grid\SerialColumn'],
 
 
-'nama_kelompok',
-[
-    'attribute'=>'jenis_anggota',
-    'value'=>'jenis_anggota',
+    'nama_kelompok',
+    [
+        'attribute' => 'jenis_anggota',
+        'value' => 'jenis_anggota',
 
-    'filter'=>['PENGOLAHAN'=>'PENGOLAHAN','BUDI DAYA'=>'BUDI DAYA','PRODUKSI GARAM'=>'PRODUKSI GARAM']
+        'filter' => ['PENGOLAHAN' => 'PENGOLAHAN', 'BUDI DAYA' => 'BUDI DAYA', 'PRODUKSI GARAM' => 'PRODUKSI GARAM']
     ],
- 'tgl_pendirian:date',
 
             // 'id_propinsi',
             //'id_kota',
-            [
-                'attribute'=>'nama_kecamatan',
-                'value'=>'nama_kecamatan',
+    [
+        'attribute' => 'nama_kecamatan',
+        'value' => 'nama_kecamatan',
 
-                'filter'=>ArrayHelper::map(Kecamatan::find()->where('id_kota=3523')->asArray()->all(),  'nama_kecamatan','nama_kecamatan')
-            ],
-            [
-                'attribute'=>'nama_desa',
-                'value'=>'nama_desa',
+        'filter' => ArrayHelper::map(Kecamatan::find()->where('id_kota=3523')->asArray()->all(), 'nama_kecamatan', 'nama_kecamatan')
+    ],
+    [
+        'attribute' => 'nama_desa',
+        'value' => 'nama_desa',
 
-            ],
-             [
-                'attribute'=>'kelas_kelompok',
-                'value'=>'kelas_kelompok',
+    ],
+    [
+        'attribute' => 'kelas_kelompok',
+        'value' => 'kelas_kelompok',
 
-                'filter'=>[ 'Pemula'=>'Pemula','Madya'=>'Madya','Utama'=>'Utama']
-            ],
+        'filter' => ['Pemula' => 'Pemula', 'Madya' => 'Madya', 'Utama' => 'Utama']
+    ],
     [
         'attribute' => 'status_bantuan',
         'value' => 'status_bantuan',
 
         'filter' => ['Belum' => 'Belum', 'Sudah' => 'Sudah']
+    ],
+    [
+        'attribute' => 'tahun_bantuan',
+        'format' => 'raw',
+        'value' => function ($data) {
+            $roles = [];
+            foreach ($data->detailKelompokBantuan as $role) {
+                $roles[] = $role->tahun;
+            }
+            return implode(', ', $roles);
+        }
     ],
             // 'no_akte_notaris',
             // 'tgl_akte_notaris',
@@ -58,8 +70,10 @@ $gridColumns=[['class' => 'kartik\grid\SerialColumn'],
             // 'created_at',
             // 'updated_at',
 
-         ['class' => 'kartik\grid\ActionColumn',  'template' => Mimin::filterActionColumn([
-              'update','delete','view'],$this->context->route),    ],    ];
+    ['class' => 'kartik\grid\ActionColumn', 'template' => Mimin::filterActionColumn([
+        'update', 'delete', 'view'
+    ], $this->context->route), ],
+];
 
 
 /* @var $this yii\web\View */
@@ -75,28 +89,29 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p> <?php if ((Mimin::checkRoute($this->context->id."/create"))){ ?>        <?=  Html::a(Yii::t('app', 'Kelompok  Baru'), ['create'], ['class' => 'btn btn-success']) ?>
-    <?php } ?>    </p>
+    <p> <?php if ((Mimin::checkRoute($this->context->id . "/create"))) { ?>        <?= Html::a(Yii::t('app', 'Kelompok  Baru'), ['create'], ['class' => 'btn btn-success']) ?>
+    <?php
+} ?>    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
         'tableOptions' => ['class' => 'table  table-bordered table-hover'],
-        'striped'=>false,
-        'containerOptions'=>[true],
+        'striped' => false,
+        'containerOptions' => [true],
         'pjax' => true,
         'bordered' => true,
         'striped' => false,
         'condensed' => false,
         'responsive' => true,
         'hover' => true,
-           'showPageSummary' => true,
+        'showPageSummary' => true,
         'panel' => [
             'type' => GridView::TYPE_PRIMARY
 
         ],
-         'resizableColumns'=>true,
+        'resizableColumns' => true,
 
     ]); ?>
 

@@ -8,7 +8,6 @@ use app\models\Customer;
 use kartik\select2\Select2;
 use mdm\widgets\TabularInput;
 
-
 $js=<<<JS
 
   $(document).ready(function()
