@@ -9,7 +9,7 @@ use kartik\widgets\DepDrop;
 
 <td><?= $form->field($model,"[$key]id_anggota")->widget(DepDrop::classname(), [
 'type'=>DepDrop::TYPE_SELECT2,
-'data'=> [$model->id_anggota=>is_null($model->anggota)?"":$model->anggota->nik."-".$model->anggota->nama_anggota],
+'data'=> [$model->id_anggota=>is_null($model->anggota)?"--":$model->anggota->nik."-".$model->anggota->nama_anggota],
 'options'=>[ 'placeholder'=>'Pilih Anggota ...'],
 'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
 'pluginOptions'=>[

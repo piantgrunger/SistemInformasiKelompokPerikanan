@@ -55,7 +55,7 @@ $this->title ='Sistem Informasi Kelompok Perikanan'
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'SIKP',
+        'brandLabel' => 'SIKANNAK',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
