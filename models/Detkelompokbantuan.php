@@ -30,7 +30,7 @@ class Detkelompokbantuan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_kelompok', 'tahun'], 'required'],
+            [[ 'tahun','bantuan'], 'required'],
             [['id_kelompok', 'tahun'], 'integer'],
             [['bantuan'], 'string'],
             [['id_kelompok'], 'exist', 'skipOnError' => true, 'targetClass' => Kelompok::className(), 'targetAttribute' => ['id_kelompok' => 'id_kelompok']],

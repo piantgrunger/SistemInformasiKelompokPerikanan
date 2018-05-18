@@ -98,10 +98,10 @@ class Anggota extends \yii\db\ActiveRecord
     {
         return [
             [['nama_anggota', 'nik', 'tempat_lahir','tgl_lahir' , 'alamat', 'id_propinsi', 'id_kota', 'jml_anggota_keluarga'], 'required'],
-            [['jenis_kelamin', 'jenis_anggota','golongan_darah', 
-            'alamat', 'status_pernikahan', 'status_dalam_keluarga', 
+            [['jenis_kelamin', 'jenis_anggota','golongan_darah',
+            'alamat', 'status_pernikahan', 'status_dalam_keluarga',
             'pendidikan', 'status_kelompok_usaha', 'status_usaha',
-             'perlindungan_asuransi', 'jenis_usaha', 'sarana_prasarana', 
+             'perlindungan_asuransi', 'jenis_usaha', 'sarana_prasarana',
              'daerah_pemasaran','status_kelompok_budidaya','jenis_budidaya','nomor_sertifikat','npwp',
              'no_siup', 'no_situ', 'no_tdp', 'no_ho', 'no_izin_lainnya', 'no_skp', 'no_haccp', 'no_pirt', 'no_sni', 'no_sertifikat_lainnya','lokasi_lahan'], 'string'],
             [['tgl_lahir', 'created_at', 'updated_at'], 'safe'],
@@ -111,7 +111,7 @@ class Anggota extends \yii\db\ActiveRecord
             [['nama_anggota', 'nik', 'tempat_lahir', 'jabatan_dalam_usaha', 'no_kontak_yang_bisa_dihubungi', 'jenis_bahan_baku', 'asal_bahan_baku'], 'string', 'max' => 255],
             [['nik'], 'unique'],
             [['foto_anggota'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg','maxSize' => 512000000],
- 
+
             [['status_kelompok_usaha', 'status_usaha', 'perlindungan_asuransi', 'jenis_usaha'],'required', 'when' => function($model) {
                 return $model->jenis_anggota == 'PENGOLAHAN';
             }],
@@ -123,7 +123,7 @@ class Anggota extends \yii\db\ActiveRecord
                 return $model->jenis_anggota == 'PRODUKSI GARAM';
             }],
           [['nik'],'checkNIK']
-           
+
         ];
     }
 
@@ -134,7 +134,7 @@ class Anggota extends \yii\db\ActiveRecord
     {
         return [
             'jenis_anggota' => Yii::t('app', 'Jenis Kelompok'),
-    
+
             'id_anggota' => Yii::t('app', 'Id Anggota'),
             'nama_anggota' => Yii::t('app', 'Nama Anggota'),
             'nik' => Yii::t('app', 'NIK'),
@@ -189,24 +189,24 @@ class Anggota extends \yii\db\ActiveRecord
         // no real check at the moment to be sure that the error is triggered
       $pos = substr($this->nik, 0,4);
        if ((strlen($this->nik) !== 16)||($pos!=='3523') )
-       {  
+       {
           $this->addError($attribute,'Format NIK Harus 16 digit dan diawali 3523');
-          return false;          
-       }  
+          return false;
+       }
     }
     public function upload()
     {
         $path =Yii::getAlias('@app').'/web/image/';
         $fieldName ='foto_anggota';
-       
+
         $image = UploadedFile::getInstance($this,$fieldName);
-      
-        if(!empty($image) && $image->size !== 0) {  
-            $fileNames =   md5($this->nik) . '.' .$image->extension;    
-        
+
+        if(!empty($image) && $image->size !== 0) {
+            $fileNames =   md5($this->nik) . '.' .$image->extension;
+
             if ($image->saveAs($path .$fileNames)){
                 $this->attributes=array($fieldName=>$fileNames);
-                
+
                 return true;
             } else {
                 return false;
@@ -214,12 +214,12 @@ class Anggota extends \yii\db\ActiveRecord
         } else
         {
             $this->attributes=array($fieldName=>$this->old_foto_anggota);
-            
-               
+
+
           return true;
-        }  
+        }
     }
- 
+
 public function getPropinsi()
 {
     return $this->hasOne(Propinsi::className(), ['id_propinsi' => 'id_propinsi']);
@@ -232,6 +232,16 @@ public function getKota()
 {
     return $this->hasOne(Kota::className(), ['id_kota' => 'id_kota']);
 }
+ public function getUmur()
+{
+        $d1 = new \DateTime($this->tgl_lahir);
+        $d2 = new \DateTime();
+
+        $diff = $d2->diff($d1);
+
+        return $diff->y;
+ }
+
 
 
 public function getKelompok()
@@ -270,20 +280,20 @@ public function getNama_desa()
 }
 
 public static function getDataBrowseAnggota($jenis_anggota)
-{        
+{
     $data=Anggota::find()
     ->select([
    'id'=>'id_anggota','name'=>"concat(nama_anggota,'-',nik)"
    ])
    ->where(['jenis_anggota'=>$jenis_anggota])
-   ->asArray()      
+   ->asArray()
    ->all();
 
-foreach ($data as $i => $list) 
+foreach ($data as $i => $list)
 {
 $out[] = ['id' => $list['id'], 'name' => $list['name']];
 }
-return $out;  
+return $out;
 
 }
 

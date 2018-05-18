@@ -96,8 +96,13 @@ class KelompokSearch extends Kelompok
             ->andFilterWhere(['like', 'nilai_kelompok', $this->nilai_kelompok])
             ->andFilterWhere(['like', 'status_bantuan', $this->status_bantuan]);
 
-               $qDetail = Detkelompokbantuan::find()->select('id_kelompok')->filterWhere(['like','tahun' , $this->tahun_bantuan]);
+            if (!is_null($this->tahun_bantuan) && ($this->tahun_bantuan !==""))
+            {
+               $qDetail = Detkelompokbantuan::find()->select('id_kelompok')->
+                filterWhere(['like','tahun' , $this->tahun_bantuan]);
                $query->andFilterWhere(['in', 'id_kelompok', $qDetail]);
+            }
+
 
 
 
