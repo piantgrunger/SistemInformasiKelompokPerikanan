@@ -18,7 +18,7 @@ use yii\bootstrap\Tabs;
 
 <?= $form->field($model, 'nama_kelompok')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'jenis_anggota')->dropDownList([ 'PENGOLAHAN' => 'PENGOLAHAN', 'BUDI DAYA' => 'BUDI DAYA', 'PRODUKSI GARAM' => 'PRODUKSI GARAM', ], ['prompt' => ''])
+<?= $form->field($model, 'jenis_anggota')->dropDownList([ 'PENGOLAHAN' => 'PENGOLAHAN', 'BUDIDAYA' => 'BUDIDAYA', 'GARAM' => 'GARAM', ], ['prompt' => ''])
   ->label('Jenis Kelompok');
 ?>
 

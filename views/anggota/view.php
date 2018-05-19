@@ -63,7 +63,7 @@ if( $model->jenis_anggota == 'PENGOLAHAN')
 
 ];
 }else
-if( $model->jenis_anggota == 'BUDI DAYA')
+if( $model->jenis_anggota == 'BUDIDAYA')
 {
     $attributes1=[
     'status_kelompok_budidaya',
@@ -76,7 +76,7 @@ if( $model->jenis_anggota == 'BUDI DAYA')
 
 ];
 }else
-if( $model->jenis_anggota == 'PRODUKSI GARAM')
+if( $model->jenis_anggota == 'GARAM')
 {
     $attributes1=[
     'no_kontak_yang_bisa_dihubungi',

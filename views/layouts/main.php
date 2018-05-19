@@ -13,7 +13,6 @@ AppAsset::register($this);
 use hscstudio\mimin\components\Mimin;
 $menuItems =
         [
-                    ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii/'],'visible' => !Yii::$app->user->isGuest],
                     [
                         'visible' => !Yii::$app->user->isGuest,
                         'label' => 'Manajemen User / Group',
@@ -93,7 +92,7 @@ $this->title ='Sistem Informasi Kelompok Perikanan'
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Sistem Informasi Kelompok Perikanan <?= date('Y') ?></p>
+        <p class="pull-left">&copy; SIKANNAK <?= date('Y') ?></p>
 
     </div>
 </footer>

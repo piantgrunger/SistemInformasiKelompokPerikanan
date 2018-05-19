@@ -19,7 +19,7 @@ $gridColumns=[['class' => 'kartik\grid\SerialColumn'],
             'attribute'=>'jenis_anggota',
             'value'=>'jenis_anggota',
 
-            'filter'=>['PENGOLAHAN'=>'PENGOLAHAN','BUDI DAYA'=>'BUDI DAYA','PRODUKSI GARAM'=>'PRODUKSI GARAM']
+            'filter'=>['PENGOLAHAN'=>'PENGOLAHAN','BUDIDAYA'=>'BUDIDAYA','GARAM'=>'GARAM']
             ],
             // 'tgl_lahir',
             // 'golongan_darah',
@@ -85,11 +85,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php } ?>    </p>
     </div><div class="col-md-4 text-center">
     <p> <?php if ((Mimin::checkRoute($this->context->id."/budidayabaru"))){ ?>
-           <?=  Html::a(Yii::t('app', 'Anggota Budi Daya Baru'), ['budidayabaru'], ['class' => 'btn btn-success']) ?>
+           <?=  Html::a(Yii::t('app', 'Anggota Budidaya Baru'), ['budidayabaru'], ['class' => 'btn btn-success']) ?>
     <?php } ?>    </p>
     </div><div class="col-md-4 text-center">
     <p> <?php if ((Mimin::checkRoute($this->context->id."/budidayabaru"))){ ?>
-           <?=  Html::a(Yii::t('app', 'Anggota Produksi  Garam Baru'), ['garambaru'], ['class' => 'btn btn-success']) ?>
+           <?=  Html::a(Yii::t('app', 'Anggota Garam Baru'), ['garambaru'], ['class' => 'btn btn-success']) ?>
     <?php } ?>    </p>
     </div>
     </div>

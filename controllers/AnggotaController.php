@@ -113,14 +113,14 @@ class AnggotaController extends Controller
         $model = new Anggota();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->jenis_anggota = 'BUDI DAYA';
+            $model->jenis_anggota = 'BUDIDAYA';
 
             if ($model->upload()&& $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id_anggota]);
             } else {
                 $model->id_propinsi = 35;
                 $model->id_kota = 3523;
-                $model->jenis_anggota = 'BUDI DAYA';
+                $model->jenis_anggota = 'BUDIDAYA';
 
                 return $this->render('create', [
                     'model' => $model,
@@ -130,7 +130,7 @@ class AnggotaController extends Controller
         } else {
             $model->id_propinsi = 35;
             $model->id_kota = 3523;
-            $model->jenis_anggota = 'BUDI DAYA';
+            $model->jenis_anggota = 'BUDIDAYA';
 
             return $this->render('create', [
                 'model' => $model,
@@ -142,14 +142,14 @@ class AnggotaController extends Controller
         $model = new Anggota();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->jenis_anggota = 'PRODUKSI GARAM';
+            $model->jenis_anggota = 'GARAM';
 
             if ($model->upload()&&$model->save()) {
                 return $this->redirect(['view', 'id' => $model->id_anggota]);
             } else {
                 $model->id_propinsi = 35;
                 $model->id_kota = 3523;
-                $model->jenis_anggota = 'PRODUKSI GARAM';
+                $model->jenis_anggota = 'GARAM';
 
                 return $this->render('create', [
                     'model' => $model,
@@ -159,7 +159,7 @@ class AnggotaController extends Controller
         } else {
             $model->id_propinsi = 35;
             $model->id_kota = 3523;
-            $model->jenis_anggota = 'PRODUKSI GARAM';
+            $model->jenis_anggota = 'GARAM';
 
             return $this->render('create', [
                 'model' => $model,

@@ -19,7 +19,7 @@ $gridColumns = [
         'attribute' => 'jenis_anggota',
         'value' => 'jenis_anggota',
 
-        'filter' => ['PENGOLAHAN' => 'PENGOLAHAN', 'BUDI DAYA' => 'BUDI DAYA', 'PRODUKSI GARAM' => 'PRODUKSI GARAM']
+        'filter' => ['PENGOLAHAN' => 'PENGOLAHAN', 'BUDIDAYA' => 'BUDIDAYA', 'GARAM' => 'GARAM']
     ],
 
             // 'id_propinsi',

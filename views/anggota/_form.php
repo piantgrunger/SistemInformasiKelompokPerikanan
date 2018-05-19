@@ -42,17 +42,17 @@ $item[]= [
 ];
 }
 
-if($model->jenis_anggota ==='BUDI DAYA')
+if($model->jenis_anggota ==='BUDIDAYA')
 {
 $item[]= [
-    'label' => 'Data Budi Daya',
+    'label' => 'Data Budidaya',
     'content' => $this->render('_form_budidaya', ['model' => $model, 'form' => $form]),
 ];
 }
-if($model->jenis_anggota ==='PRODUKSI GARAM')
+if($model->jenis_anggota ==='GARAM')
 {
 $item[]= [
-    'label' => 'Data Produksi Garam',
+    'label' => 'Data Garam',
     'content' => $this->render('_form_garam', ['model' => $model, 'form' => $form]),
 ];
 }

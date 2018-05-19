@@ -22,7 +22,7 @@ $fieldOptions2 = [
     <div class="login-logo">
                   
             
-                    <H3>Sistem Informasi Kelompok Perikanan</H3>
+                    <H3>SIKANNAK</H3>
                   
       
     </div>
