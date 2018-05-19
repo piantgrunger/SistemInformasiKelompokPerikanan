@@ -138,10 +138,6 @@ public function getPropinsi()
     return $this->hasOne(Propinsi::className(), ['id_propinsi' => 'id_propinsi']);
 }
 
-public function getDetailKelompok()
-{
-    return $this->hasMany(Detkelompok::className(), ['id_kelompok' => 'id_kelompok']);
-}
 public function setDetailKelompok($value)
 {
     return $this->loadRelated('detailKelompok',$value);
@@ -183,6 +179,35 @@ public function getKelurahan()
 public function getNama_kecamatan()
 {
     return ($this->kecamatan===null)?'':$this->kecamatan->nama_kecamatan;
+}
+
+public function getDetailKelompok()
+{
+    return $this->hasMany(Detkelompok::className(), ['id_kelompok' => 'id_kelompok']);
+}
+public function getJumlah_anggota()
+{
+    return count($this->detailKelompok);
+}
+public function getDetailKelompokLakiLaki()
+{
+    return $this->hasMany(Detkelompok::className(), ['id_kelompok' => 'id_kelompok'])
+    ->innerJoin('tb_m_anggota','tb_m_anggota.id_anggota=tb_d_kelompok.id_anggota')
+    ->where(['jenis_kelamin'=>'Laki-Laki']);
+}
+public function getLaki_laki()
+{
+    return count($this->detailKelompokLakiLaki);
+}
+public function getDetailKelompokPerempuan()
+{
+    return $this->hasMany(Detkelompok::className(), ['id_kelompok' => 'id_kelompok'])
+    ->innerJoin('tb_m_anggota','tb_m_anggota.id_anggota=tb_d_kelompok.id_anggota')
+    ->where(['jenis_kelamin'=>'Perempuan']);
+}
+public function getPerempuan()
+{
+    return count($this->detailKelompokPerempuan);
 }
 
 /**

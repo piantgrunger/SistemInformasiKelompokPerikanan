@@ -30,11 +30,7 @@ $gridColumns = [
 
         'filter' => ArrayHelper::map(Kecamatan::find()->where('id_kota=3523')->asArray()->all(), 'nama_kecamatan', 'nama_kecamatan')
     ],
-    [
-        'attribute' => 'nama_desa',
-        'value' => 'nama_desa',
-
-    ],
+   
     [
         'attribute' => 'kelas_kelompok',
         'value' => 'kelas_kelompok',
@@ -58,6 +54,25 @@ $gridColumns = [
             return implode(', ', $roles);
         }
     ],
+            'jumlah_anggota',
+            [
+            'attribute'=>'laki_laki',
+            'label' =>'L',
+
+            'options' => [
+                'width' => '20px',
+            ]
+            ],
+            
+            [
+                'attribute'=>'perempuan',
+                'label' =>'P',
+    
+                'options' => [
+                    'width' => '20px',
+                ],
+            ],   
+           
             // 'no_akte_notaris',
             // 'tgl_akte_notaris',
             // 'nama_notaris',

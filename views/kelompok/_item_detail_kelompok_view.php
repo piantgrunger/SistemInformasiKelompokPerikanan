@@ -12,3 +12,6 @@ use kartik\widgets\DepDrop;
      </td>
      <td>    <?=$model->posisi ?>
 </td>
+<td>    <?=$model->jenis_kelamin ?>
+</td>    <td>    <?=$model->umur ?>
+</td>

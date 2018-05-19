@@ -64,6 +64,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <th>Nama</th>
             <th>Posisi</th>
+            <th>Jenis Kelamin</th>
+            <th>Umur</th>
 
         </tr>
     </thead>

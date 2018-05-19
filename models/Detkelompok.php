@@ -94,6 +94,15 @@ class Detkelompok extends \yii\db\ActiveRecord
     {
         return is_null($this->anggota)?"":$this->anggota->nama_anggota;
     }
+    public function getJenis_kelamin()
+    {
+        return is_null($this->anggota)?"":$this->anggota->jenis_kelamin;
+    }
+    public function getUmur()
+    {
+        return is_null($this->anggota)?"":$this->anggota->Umur;
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery
