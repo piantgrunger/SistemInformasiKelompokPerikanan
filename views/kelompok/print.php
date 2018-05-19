@@ -7,30 +7,13 @@ use hscstudio\mimin\components\Mimin;
 /* @var $this yii\web\View */
 /* @var $model app\models\Kelompok */
 
-$this->title = $model->nama_kelompok;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Daftar Kelompok'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Data Kelompok';
 ?>
 <div class="kelompok-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-             <?php if ((Mimin::checkRoute($this->context->id . "/update"))) {
-    ?>        <?= Html::a(Yii::t('app', 'Ubah'), ['update', 'id' => $model->id_kelompok], ['class' => 'btn btn-primary']) ?>
-        <?php
-}
-    if ((Mimin::checkRoute($this->context->id . "/delete"))) {
-        ?>        <?= Html::a(Yii::t('app', 'Hapus'), ['delete', 'id' => $model->id_kelompok], [
-                                                                            'class' => 'btn btn-danger',
-                                                                            'data' => [
-                                                                                'confirm' => Yii::t('app', 'Apakah Anda yakin ingin menghapus item ini??'),
-                                                                                'method' => 'post',
-                                                                            ],
-                                                                        ]) ?>
-      <?php } if ((Mimin::checkRoute($this->context->id."/print"))){ ?>        <?= Html::a(Yii::t('app', 'Cetak'), ['print', 'id' => $model->id_kelompok], ['class' => 'btn btn-success']) ?>
-    <?php } ?>    </p>
-    </p>
+
 
     <?= DetailView::widget([
         'model' => $model,
@@ -51,8 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nama_bank',
             'cabang',
             'nama_pemilik_rekening',
-            'created_at',
-            'updated_at',
+            
         ],
     ]) ?>
     <div class="panel panel-primary">

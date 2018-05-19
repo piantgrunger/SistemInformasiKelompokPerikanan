@@ -85,9 +85,17 @@ $gridColumns = [
             // 'created_at',
             // 'updated_at',
 
-    ['class' => 'kartik\grid\ActionColumn', 'template' => Mimin::filterActionColumn([
-        'update', 'delete', 'view'
-    ], $this->context->route), ],
+            ['class' => 'kartik\grid\ActionColumn',  'template' => Mimin::filterActionColumn([
+                'update','delete','view'],$this->context->route) ." {print} ",
+                'buttons' => [
+  
+                'print' => function ($url, $model) {
+                  return Html::a('<span class="glyphicon glyphicon-print"></span>',
+                  ['print','id'=>$model->id_kelompok], [
+                             'title' => Yii::t('app', 'Cetak'),
+                             'target' => '_blank', 'class' => 'linksWithTarget', 'data-pjax' => 0]);
+                },]
+         ], 
 ];
 
 
