@@ -205,7 +205,13 @@ $pdf = new Pdf([
         $out = [];
         if (isset($_POST['depdrop_parents'])) {
             $id_propinsi = $_POST['depdrop_parents'];
-            $out = Anggota::getDataBrowseAnggota($id_propinsi); 
+            $param1 = null;
+            if (!empty($_POST['depdrop_params'])) {
+                $params = $_POST['depdrop_params'];
+                $param1 = $params[0]; // get the value of input-type-1
+            }
+ 
+            $out = Anggota::getDataBrowseAnggota($id_propinsi,$param1); 
             // the getDefaultSubCat function will query the database
             // and return the default sub cat for the cat_id
 

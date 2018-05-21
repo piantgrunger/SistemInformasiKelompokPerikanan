@@ -17,6 +17,7 @@ use kartik\widgets\DepDrop;
     'url'=>Url::to(['/kelompok/anggota']),
     'placeholder'=>'Pilih Anggota ...',
     'initialize' =>true,
+    'params' =>['input-id_kelompok'],
     
     ]
 ])->label(false); ?>

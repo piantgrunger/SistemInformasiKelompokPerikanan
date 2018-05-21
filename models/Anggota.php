@@ -279,13 +279,15 @@ public function getNama_desa()
     return ($this->kelurahan===null)?"":$this->kelurahan->nama_kelurahan;
 }
 
-public static function getDataBrowseAnggota($jenis_anggota)
+public static function getDataBrowseAnggota($jenis_anggota,$id_kelompok)
 {
     $data=Anggota::find()
     ->select([
-   'id'=>'id_anggota','name'=>"concat(nama_anggota,'-',nik)"
+   'id'=>'tb_m_anggota.id_anggota','name'=>"concat(nama_anggota,'-',nik)"
    ])
+   ->leftJoin('tb_d_kelompok',"tb_m_anggota.id_anggota = tb_d_kelompok.id_anggota ")
    ->where(['jenis_anggota'=>$jenis_anggota])
+   ->andWhere(['or',"tb_d_kelompok.id_kelompok='$id_kelompok'",'tb_d_kelompok.id_kelompok is null'])
    ->asArray()
    ->all();
 

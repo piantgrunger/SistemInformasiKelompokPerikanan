@@ -8,7 +8,7 @@ use yii\db\Migration;
 class m180514_163053_create extends Migration
 {
     /**
-     * {@inheritdoc}
+     ]inheritdoc}
      */
     public function safeUp()
     {

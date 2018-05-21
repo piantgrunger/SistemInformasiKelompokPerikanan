@@ -21,6 +21,7 @@ use yii\bootstrap\Tabs;
 
     <?php $form = ActiveForm::begin(); ?>
         <?= $form->errorSummary($model) ?> <!-- ADDED HERE -->
+        <?php echo Html::hiddenInput('input-id_kelompok', $model->id_kelompok, ['id'=>'input-id_kelompok']);?>
   <?php
         $item =
 [
