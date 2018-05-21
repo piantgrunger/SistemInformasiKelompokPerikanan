@@ -100,7 +100,7 @@ class Detkelompok extends \yii\db\ActiveRecord
     }
     public function getUmur()
     {
-        return is_null($this->anggota)?"":$this->anggota->mur;
+        return is_null($this->anggota)?"":$this->anggota->umur;
     }
 
 
