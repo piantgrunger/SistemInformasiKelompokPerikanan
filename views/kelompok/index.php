@@ -30,7 +30,7 @@ $gridColumns = [
 
         'filter' => ArrayHelper::map(Kecamatan::find()->where('id_kota=3523')->asArray()->all(), 'nama_kecamatan', 'nama_kecamatan')
     ],
-   
+
     [
         'attribute' => 'kelas_kelompok',
         'value' => 'kelas_kelompok',
@@ -54,25 +54,27 @@ $gridColumns = [
             return implode(', ', $roles);
         }
     ],
-            'jumlah_anggota',
+    [
+        'attribute' => 'jumlah_anggota',
+        'label' => ' jml Anggota ',
+
+
+    ],
+
             [
             'attribute'=>'laki_laki',
-            'label' =>'L',
+            'label' =>' L ',
 
-            'options' => [
-                'width' => '20px',
-            ]
+
             ],
-            
+
             [
                 'attribute'=>'perempuan',
-                'label' =>'P',
-    
-                'options' => [
-                    'width' => '20px',
-                ],
-            ],   
-           
+                'label' =>' P ',
+
+
+            ],
+
             // 'no_akte_notaris',
             // 'tgl_akte_notaris',
             // 'nama_notaris',
@@ -88,14 +90,14 @@ $gridColumns = [
             ['class' => 'kartik\grid\ActionColumn',  'template' => Mimin::filterActionColumn([
                 'update','delete','view'],$this->context->route) ." {print} ",
                 'buttons' => [
-  
+
                 'print' => function ($url, $model) {
                   return Html::a('<span class="glyphicon glyphicon-print"></span>',
                   ['print','id'=>$model->id_kelompok], [
                              'title' => Yii::t('app', 'Cetak'),
                              'target' => '_blank', 'class' => 'linksWithTarget', 'data-pjax' => 0]);
                 },]
-         ], 
+         ],
 ];
 
 

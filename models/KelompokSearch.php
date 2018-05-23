@@ -18,11 +18,15 @@ class KelompokSearch extends Kelompok
     public $nama_kecamatan;
     public $nama_desa;
     public $tahun_bantuan;
+    public $laki_laki;
+    public $perempuan;
+    public $jumlah_anggota;
+
 
     public function rules()
     {
         return [
-            [['id_kelompok', 'id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan'], 'integer'],
+            [['id_kelompok', 'id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan','laki_laki','perempuan','jumlah_anggota'], 'integer'],
             [['nama_kelompok', 'tgl_pendirian', 'no_pengukuhan', 'tgl_pengukuhan', 'no_akte_notaris', 'tgl_akte_notaris', 'nama_notaris', 'tgl_mulai_usaha', 'no_telepon', 'no_rekening_bank', 'nama_bank', 'cabang', 'nama_pemilik_rekening', 'created_at', 'updated_at','jenis_anggota','nama_desa','nama_kecamatan','kelas_kelompok','nilai_kelompok','status_bantuan','tahun_bantuan'], 'safe'],
         ];
     }
@@ -98,15 +102,58 @@ class KelompokSearch extends Kelompok
 
             if (!is_null($this->tahun_bantuan) && ($this->tahun_bantuan !==""))
             {
-               $qDetail = Detkelompokbantuan::find()->select('id_kelompok')->
-                filterWhere(['like','tahun' , $this->tahun_bantuan]);
+               $qDetail = Detkelompokbantuan::find()->select('id_kelompok')->filterWhere(['like','tahun' , $this->tahun_bantuan]);
                $query->andFilterWhere(['in', 'id_kelompok', $qDetail]);
             }
+          if (!is_null($this->laki_laki) && ($this->laki_laki !== "")) {
+            if ($this->laki_laki > 0) {
+                $qDetail = Detkelompok::find()->select('id_kelompok')
+            ->innerJoin('tb_m_anggota', 'tb_m_anggota.id_anggota = tb_d_kelompok.id_anggota ')
+            ->where("jenis_kelamin='laki-laki'")
+            ->groupBy('id_kelompok')->having(['count(id_kelompok)' => $this->laki_laki]);
+                $query->andFilterWhere(['in', 'id_kelompok', $qDetail]);
+            }else {
+                $qDetail = Detkelompok::find()->select('id_kelompok')
+                    ->innerJoin('tb_m_anggota', 'tb_m_anggota.id_anggota = tb_d_kelompok.id_anggota ')
+                    ->where("jenis_kelamin='laki-laki'");
+                $query->andFilterWhere(['not in', 'id_kelompok', $qDetail]);
+
+            }
+        }
+        if (!is_null($this->perempuan) && ($this->perempuan !== "")) {
+            if ($this->perempuan >0) {
+                    $qDetail = Detkelompok::find()->select('id_kelompok')
+                    ->innerJoin('tb_m_anggota', 'tb_m_anggota.id_anggota = tb_d_kelompok.id_anggota ')
+                    ->where("jenis_kelamin='perempuan'")
+                    ->groupBy('id_kelompok')->having(['count(id_kelompok)' => $this->perempuan]);
+                    $query->andFilterWhere(['in', 'id_kelompok', $qDetail]);
+            }else {
+                $qDetail = Detkelompok::find()->select('id_kelompok')
+                    ->innerJoin('tb_m_anggota', 'tb_m_anggota.id_anggota = tb_d_kelompok.id_anggota ')
+                    ->where("jenis_kelamin='perempuan'")
+                    ->groupBy('id_kelompok');
+                $query->andFilterWhere(['not in', 'id_kelompok', $qDetail]);
+            }
+        }
+
+          if (!is_null($this->jumlah_anggota) && ($this->jumlah_anggota !== "")) {
+            if ($this->jumlah_anggota > 0) {
+                $qDetail = Detkelompok::find()->select('id_kelompok')
+            ->innerJoin('tb_m_anggota', 'tb_m_anggota.id_anggota = tb_d_kelompok.id_anggota ')
+
+            ->groupBy('id_kelompok')->having(['count(id_kelompok)' => $this->jumlah_anggota]);
+                $query->andFilterWhere(['in', 'id_kelompok', $qDetail]);
+            }else {
+                $qDetail = Detkelompok::find()->select('id_kelompok')
+                    ->innerJoin('tb_m_anggota', 'tb_m_anggota.id_anggota = tb_d_kelompok.id_anggota ');
+
+                $query->andFilterWhere(['not in', 'id_kelompok', $qDetail]);
+
+            }
+        }
 
 
 
-
-            ;
 
 
 

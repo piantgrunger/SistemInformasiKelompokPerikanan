@@ -18,10 +18,10 @@ use kartik\widgets\DepDrop;
     'placeholder'=>'Pilih Anggota ...',
     'initialize' =>true,
     'params' =>['input-id_kelompok'],
-    
+
     ]
 ])->label(false); ?>
-       
+
      </td>
      <td>    <?= $form->field($model, "[$key]posisi")->dropDownList([ 'KETUA' => 'KETUA', 'WAKIL KETUA' => 'WAKIL KETUA',
     'BENDAHARA'=>'BENDAHARA',
