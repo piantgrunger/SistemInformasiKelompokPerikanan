@@ -56,7 +56,7 @@ $gridColumns = [
     ],
     [
         'attribute' => 'jumlah_anggota',
-        'label' => ' jml Anggota ',
+        'label' => ' Jml Anggota ',
 
 
     ],
@@ -64,6 +64,7 @@ $gridColumns = [
             [
             'attribute'=>'laki_laki',
             'label' =>' L ',
+        'filter' => ['Ya' => 'Ya', 'Tidak' => 'Tidak']
 
 
             ],
@@ -71,6 +72,7 @@ $gridColumns = [
             [
                 'attribute'=>'perempuan',
                 'label' =>' P ',
+        'filter' => ['Ya' => 'Ya', 'Tidak' => 'Tidak']
 
 
             ],
