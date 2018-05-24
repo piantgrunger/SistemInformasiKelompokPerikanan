@@ -57,6 +57,7 @@ $gridColumns = [
     [
         'attribute' => 'jumlah_anggota',
         'label' => ' Jml Anggota ',
+      'pageSummary'=>true,
 
 
     ],
@@ -64,7 +65,8 @@ $gridColumns = [
             [
             'attribute'=>'laki_laki',
             'label' =>' L ',
-        'filter' => ['Ya' => 'Ya', 'Tidak' => 'Tidak']
+        'filter' => ['Ya' => 'Ya', 'Tidak' => 'Tidak'],
+              'pageSummary'=>true,
 
 
             ],
@@ -72,7 +74,8 @@ $gridColumns = [
             [
                 'attribute'=>'perempuan',
                 'label' =>' P ',
-        'filter' => ['Ya' => 'Ya', 'Tidak' => 'Tidak']
+        'filter' => ['Ya' => 'Ya', 'Tidak' => 'Tidak'],
+              'pageSummary'=>true,
 
 
             ],
@@ -139,6 +142,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ],
         'resizableColumns' => true,
+           'showFooter' => true
 
     ]); ?>
 
