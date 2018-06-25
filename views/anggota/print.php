@@ -73,6 +73,8 @@ if( $model->jenis_anggota == 'BUDIDAYA')
     'nilai_sertifikasi:decimal',
     'nomor_sertifikat',
     'npwp',
+       'jumlah_produksi_bulanan:decimal',
+  'kapasitas_produksi_bulanan:decimal', 
 
 ];
 }else
