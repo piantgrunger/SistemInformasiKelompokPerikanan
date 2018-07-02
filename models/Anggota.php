@@ -3,21 +3,16 @@
 namespace app\models;
 
 use Yii;
-
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\web\UploadedFile;
-use yii\helpers\ArrayHelper;
-
-
-
-
+use mdm\behaviors\ar\RelationTrait;
 
 /**
  * This is the model class for table "{{%tb_m_anggota}}".
  *
- * @property int $id_anggota
+ * @property int    $id_anggota
  * @property string $nama_anggota
  * @property string $nik
  * @property string $jenis_kelamin
@@ -25,13 +20,13 @@ use yii\helpers\ArrayHelper;
  * @property string $tgl_lahir
  * @property string $golongan_darah
  * @property string $alamat
- * @property int $id_propinsi
- * @property int $id_kota
- * @property int $id_kecamatan
- * @property int $id_kelurahan
+ * @property int    $id_propinsi
+ * @property int    $id_kota
+ * @property int    $id_kecamatan
+ * @property int    $id_kelurahan
  * @property string $status_pernikahan
  * @property string $status_dalam_keluarga
- * @property int $jml_anggota_keluarga
+ * @property int    $jml_anggota_keluarga
  * @property string $pendidikan
  * @property string $created_at
  * @property string $updated_at
@@ -40,17 +35,17 @@ use yii\helpers\ArrayHelper;
  * @property string $jabatan_dalam_usaha
  * @property string $perlindungan_asuransi
  * @property string $no_kontak_yang_bisa_dihubungi
- * @property int $stat_siup
- * @property int $stat_situ
- * @property int $stat_tdp
- * @property int $stat_ho
- * @property int $stat_izin_lainnya
- * @property int $stat_skp
- * @property int $stat_haccp
- * @property int $stat_pirt
- * @property int $stat_sni
- * @property int $stat_sertifikat_lainnya
- * @property int $tahun_berdiri
+ * @property int    $stat_siup
+ * @property int    $stat_situ
+ * @property int    $stat_tdp
+ * @property int    $stat_ho
+ * @property int    $stat_izin_lainnya
+ * @property int    $stat_skp
+ * @property int    $stat_haccp
+ * @property int    $stat_pirt
+ * @property int    $stat_sni
+ * @property int    $stat_sertifikat_lainnya
+ * @property int    $tahun_berdiri
  * @property string $jenis_usaha
  * @property string $jenis_bahan_baku
  * @property string $asal_bahan_baku
@@ -60,18 +55,17 @@ use yii\helpers\ArrayHelper;
  * @property string $pendapatan_bulanan
  * @property string $nilai_aset
  * @property string $sarana_prasarana
- * @property int $jumlah_tenaga_kerja
+ * @property int    $jumlah_tenaga_kerja
  * @property string $daerah_pemasaran
  */
 class Anggota extends \yii\db\ActiveRecord
 {
+    use RelationTrait;
     public $old_foto_anggota;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-
-
     public function behaviors()
     {
         return [
@@ -86,49 +80,49 @@ class Anggota extends \yii\db\ActiveRecord
             ],
         ];
     }
+
     public static function tableName()
     {
         return '{{%tb_m_anggota}}';
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['nama_anggota', 'nik', 'tempat_lahir','tgl_lahir' , 'alamat', 'id_propinsi', 'id_kota', 'jml_anggota_keluarga'], 'required'],
-            [['jenis_kelamin', 'jenis_anggota','golongan_darah',
+            [['nama_anggota', 'nik', 'tempat_lahir', 'tgl_lahir', 'alamat', 'id_propinsi', 'id_kota', 'jml_anggota_keluarga'], 'required'],
+            [['jenis_kelamin', 'jenis_anggota', 'golongan_darah',
             'alamat', 'status_pernikahan', 'status_dalam_keluarga',
             'pendidikan', 'status_kelompok_usaha', 'status_usaha',
              'perlindungan_asuransi', 'jenis_usaha', 'sarana_prasarana',
-             'daerah_pemasaran','status_kelompok_budidaya','jenis_budidaya','nomor_sertifikat','npwp',
-             'no_siup', 'no_situ', 'no_tdp', 'no_ho', 'no_izin_lainnya', 'no_skp', 'no_haccp', 'no_pirt', 'no_sni', 'no_sertifikat_lainnya','lokasi_lahan'], 'string'],
+             'daerah_pemasaran', 'status_kelompok_budidaya', 'jenis_budidaya', 'nomor_sertifikat', 'npwp',
+             'no_siup', 'no_situ', 'no_tdp', 'no_ho', 'no_izin_lainnya', 'no_skp', 'no_haccp', 'no_pirt', 'no_sni', 'no_sertifikat_lainnya', 'lokasi_lahan', ], 'string'],
             [['tgl_lahir', 'created_at', 'updated_at'], 'safe'],
             [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan', 'jml_anggota_keluarga', 'stat_siup', 'stat_situ', 'stat_tdp', 'stat_ho', 'stat_izin_lainnya', 'stat_skp', 'stat_haccp', 'stat_pirt', 'stat_sni', 'stat_sertifikat_lainnya', 'tahun_berdiri', 'jumlah_tenaga_kerja'], 'integer'],
             [['jumlah_bahan_baku_bulanan', 'jumlah_produksi_bulanan',
-             'kapasitas_produksi_bulanan', 'pendapatan_bulanan', 'nilai_aset','luas_lahan','nilai_sertifikasi'], 'number'],
+             'kapasitas_produksi_bulanan', 'pendapatan_bulanan', 'nilai_aset', 'luas_lahan', 'nilai_sertifikasi', ], 'number'],
             [['nama_anggota', 'nik', 'tempat_lahir', 'jabatan_dalam_usaha', 'no_kontak_yang_bisa_dihubungi', 'jenis_bahan_baku', 'asal_bahan_baku'], 'string', 'max' => 255],
             [['nik'], 'unique'],
-            [['foto_anggota'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg','maxSize' => 512000000],
+            [['foto_anggota'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,bmp,jpeg', 'maxSize' => 512000000],
 
-            [['status_kelompok_usaha', 'status_usaha', 'perlindungan_asuransi', 'jenis_usaha'],'required', 'when' => function($model) {
+            [['status_kelompok_usaha', 'status_usaha', 'perlindungan_asuransi', 'jenis_usaha'], 'required', 'when' => function ($model) {
                 return $model->jenis_anggota == 'PENGOLAHAN';
             }],
-            [['status_kelompok_budidaya', 'jenis_budidaya', 'status_sertifikasi_cbib_cpib'
-            ],'required', 'when' => function($model) {
+            [['status_kelompok_budidaya', 'jenis_budidaya', 'status_sertifikasi_cbib_cpib',
+            ], 'required', 'when' => function ($model) {
                 return $model->jenis_anggota == 'BUDIDAYA';
             }],
-            [[ 'status_lahan','tekhnologi_digunakan','kualitas_produksi'],'required', 'when' => function($model) {
+            [['status_lahan', 'tekhnologi_digunakan', 'kualitas_produksi'], 'required', 'when' => function ($model) {
                 return $model->jenis_anggota == 'GARAM';
             }],
-          [['nik'],'checkNIK']
-
+          [['nik'], 'checkNIK'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -187,116 +181,143 @@ class Anggota extends \yii\db\ActiveRecord
     public function checkNIK($attribute, $params)
     {
         // no real check at the moment to be sure that the error is triggered
-      $pos = substr($this->nik, 0,4);
-       if ((strlen($this->nik) !== 16)||($pos!=='3523') )
-       {
-          $this->addError($attribute,'Format NIK Harus 16 digit dan diawali 3523');
-          return false;
-       }
+        $pos = substr($this->nik, 0, 4);
+        if ((strlen($this->nik) !== 16) || ($pos !== '3523')) {
+            $this->addError($attribute, 'Format NIK Harus 16 digit dan diawali 3523');
+
+            return false;
+        }
     }
+
     public function upload()
     {
-        $path =Yii::getAlias('@app').'/web/image/';
-        $fieldName ='foto_anggota';
+        $path = Yii::getAlias('@app').'/web/image/';
+        $fieldName = 'foto_anggota';
 
-        $image = UploadedFile::getInstance($this,$fieldName);
+        $image = UploadedFile::getInstance($this, $fieldName);
 
-        if(!empty($image) && $image->size !== 0) {
-            $fileNames =   md5($this->nik) . '.' .$image->extension;
+        if (!empty($image) && $image->size !== 0) {
+            $fileNames = md5($this->nik).'.'.$image->extension;
 
-            if ($image->saveAs($path .$fileNames)){
-                $this->attributes=array($fieldName=>$fileNames);
+            if ($image->saveAs($path.$fileNames)) {
+                $this->attributes = array($fieldName => $fileNames);
 
                 return true;
             } else {
                 return false;
             }
-        } else
-        {
-            $this->attributes=array($fieldName=>$this->old_foto_anggota);
+        } else {
+            $this->attributes = array($fieldName => $this->old_foto_anggota);
 
-
-          return true;
+            return true;
         }
     }
 
-public function getPropinsi()
-{
-    return $this->hasOne(Propinsi::className(), ['id_propinsi' => 'id_propinsi']);
-}
+    public function getPropinsi()
+    {
+        return $this->hasOne(Propinsi::className(), ['id_propinsi' => 'id_propinsi']);
+    }
 
-/**
- * @return \yii\db\ActiveQuery
- */
-public function getKota()
-{
-    return $this->hasOne(Kota::className(), ['id_kota' => 'id_kota']);
-}
- public function getUmur()
-{
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKota()
+    {
+        return $this->hasOne(Kota::className(), ['id_kota' => 'id_kota']);
+    }
+
+    public function getUmur()
+    {
         $d1 = new \DateTime($this->tgl_lahir);
         $d2 = new \DateTime();
 
         $diff = $d2->diff($d1);
 
         return $diff->y;
- }
+    }
 
+    public function getDetailAnggotaPakan()
+    {
+        return $this->hasMany(Detanggotapakan::className(), ['id_anggota' => 'id_anggota']);
+    }
 
+    public function getDetailAnggotaTebar()
+    {
+        return $this->hasMany(Detanggotatebar::className(), ['id_anggota' => 'id_anggota']);
+    }
 
-public function getKelompok()
-{
-    return $this->hasOne(Detkelompok::className(), ['id_anggota' => 'id_anggota']);
-}
+    public function getDetailAnggotaProduksi()
+    {
+        return $this->hasMany(Detanggotaproduksi::className(), ['id_anggota' => 'id_anggota']);
+    }
 
-public function getNama_kelompok()
-{
-    return ($this->kelompok===null)?"": $this->kelompok->nama_kelompok;
-}
+    public function getKelompok()
+    {
+        return $this->hasOne(Detkelompok::className(), ['id_anggota' => 'id_anggota']);
+    }
 
+    public function setDetailAnggotaTebar($value)
+    {
+        return $this->loadRelated('detailAnggotaTebar', $value);
+    }
 
-/**
- * @return \yii\db\ActiveQuery
- */
-public function getKecamatan()
-{
-    return $this->hasOne(Kecamatan::className(), ['id_kecamatan' => 'id_kecamatan']);
-}
-public function getNama_kecamatan()
-{
-    return ($this->kecamatan===null)?"": $this->kecamatan->nama_kecamatan;
-}
+    public function setDetailAnggotaPakan($value)
+    {
+        return $this->loadRelated('detailAnggotaPakan', $value);
+    }
 
-/**
- * @return \yii\db\ActiveQuery
- */
-public function getKelurahan()
-{
-    return $this->hasOne(Kelurahan::className(), ['id_kelurahan' => 'id_kelurahan']);
-}
-public function getNama_desa()
-{
-    return ($this->kelurahan===null)?"":$this->kelurahan->nama_kelurahan;
-}
+    public function setDetailAnggotaProduksi($value)
+    {
+        return $this->loadRelated('detailAnggotaProduksi', $value);
+    }
 
-public static function getDataBrowseAnggota($jenis_anggota,$id_kelompok)
-{
-    $data=Anggota::find()
+    public function getNama_kelompok()
+    {
+        return ($this->kelompok === null) ? '' : $this->kelompok->nama_kelompok;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKecamatan()
+    {
+        return $this->hasOne(Kecamatan::className(), ['id_kecamatan' => 'id_kecamatan']);
+    }
+
+    public function getNama_kecamatan()
+    {
+        return ($this->kecamatan === null) ? '' : $this->kecamatan->nama_kecamatan;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKelurahan()
+    {
+        return $this->hasOne(Kelurahan::className(), ['id_kelurahan' => 'id_kelurahan']);
+    }
+
+    public function getNama_desa()
+    {
+        return ($this->kelurahan === null) ? '' : $this->kelurahan->nama_kelurahan;
+    }
+
+    public static function getDataBrowseAnggota($jenis_anggota, $id_kelompok)
+    {
+        $data = Anggota::find()
     ->select([
-   'id'=>'tb_m_anggota.id_anggota','name'=>"concat(nama_anggota,'-',nik)"
+   'id' => 'tb_m_anggota.id_anggota', 'name' => "concat(nama_anggota,'-',nik)",
    ])
-   ->leftJoin('tb_d_kelompok',"tb_m_anggota.id_anggota = tb_d_kelompok.id_anggota ")
-   ->where(['jenis_anggota'=>$jenis_anggota])
-   ->andWhere(['or',"tb_d_kelompok.id_kelompok='$id_kelompok'",'tb_d_kelompok.id_kelompok is null'])
+   ->leftJoin('tb_d_kelompok', 'tb_m_anggota.id_anggota = tb_d_kelompok.id_anggota ')
+   ->where(['jenis_anggota' => $jenis_anggota])
+   ->andWhere(['or', "tb_d_kelompok.id_kelompok='$id_kelompok'", 'tb_d_kelompok.id_kelompok is null'])
    ->asArray()
    ->all();
 
-foreach ($data as $i => $list)
-{
-$out[] = ['id' => $list['id'], 'name' => $list['name']];
-}
-return $out;
+        foreach ($data as $i => $list) {
+            $out[] = ['id' => $list['id'], 'name' => $list['name']];
+        }
 
-}
-
+        return $out;
+    }
 }
