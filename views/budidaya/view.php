@@ -6,8 +6,7 @@ use hscstudio\mimin\components\Mimin;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Anggota */
-$attributes=[
-
+$attributes = [
     'nama_anggota',
     'nik',
     'jenis_kelamin',
@@ -21,14 +20,10 @@ $attributes=[
     'status_dalam_keluarga',
     'jml_anggota_keluarga',
     'pendidikan',
-
 ];
 
-if( $model->jenis_anggota == 'PENGOLAHAN')
-{
-    $attributes1=[
-
-
+if ($model->jenis_anggota == 'PENGOLAHAN') {
+    $attributes1 = [
         'status_kelompok_usaha',
 
         'status_usaha',
@@ -59,13 +54,10 @@ if( $model->jenis_anggota == 'PENGOLAHAN')
    'sarana_prasarana',
    'jumlah_tenaga_kerja',
 
-   'daerah_pemasaran'
-
+   'daerah_pemasaran',
 ];
-}else
-if( $model->jenis_anggota == 'BUDIDAYA')
-{
-    $attributes1=[
+} elseif ($model->jenis_anggota == 'BUDIDAYA') {
+    $attributes1 = [
     'status_kelompok_budidaya',
     'jenis_budidaya',
     'luas_lahan:decimal',
@@ -73,12 +65,9 @@ if( $model->jenis_anggota == 'BUDIDAYA')
     'nilai_sertifikasi:decimal',
     'nomor_sertifikat',
     'npwp',
-
 ];
-}else
-if( $model->jenis_anggota == 'GARAM')
-{
-    $attributes1=[
+} elseif ($model->jenis_anggota == 'GARAM') {
+    $attributes1 = [
     'no_kontak_yang_bisa_dihubungi',
 
   'tahun_berdiri',
@@ -96,12 +85,8 @@ if( $model->jenis_anggota == 'GARAM')
 
   'tekhnologi_digunakan',
   'kualitas_produksi',
-
-
 ];
-};
-
-
+}
 
 $this->title = $model->nama_anggota;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Daftar Anggota'), 'url' => ['index']];
@@ -109,28 +94,25 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="anggota-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title); ?></h1>
 
     <p>
-             <?php if ((Mimin::checkRoute($this->context->id."/update"))){ ?>        <?= Html::a(Yii::t('app', 'Ubah'), ['update', 'id' => $model->id_anggota], ['class' => 'btn btn-primary']) ?>
-        <?php } if ((Mimin::checkRoute($this->context->id."/delete"))){ ?>        <?= Html::a(Yii::t('app', 'Hapus'), ['delete', 'id' => $model->id_anggota], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Apakah Anda yakin ingin menghapus item ini??'),
-                'method' => 'post',
-            ],
-        ]) ?>
-        <?php } ?>    
+             <?php if ((Mimin::checkRoute($this->context->id.'/update'))) {
+    ?>        <?= Html::a(Yii::t('app', 'Ubah'), ['update', 'id' => $model->id_anggota], ['class' => 'btn btn-primary']); ?>
+        <?php
+} ?>
 
-<?php if ((Mimin::checkRoute($this->context->id."/print"))){ ?>        <?= Html::a(Yii::t('app', 'Cetak'), ['print', 'id' => $model->id_anggota], ['class' => 'btn btn-success']) ?>
-    <?php } ?>    </p>
+<?php if ((Mimin::checkRoute($this->context->id.'/print'))) {
+        ?>        <?= Html::a(Yii::t('app', 'Cetak'), ['print', 'id' => $model->id_anggota], ['class' => 'btn btn-success']); ?>
+    <?php
+    } ?>    </p>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => $attributes,
-    ]) ?>
+    ]); ?>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => $attributes1,
-    ]) ?>
+    ]); ?>
 
 </div>

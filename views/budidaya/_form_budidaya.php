@@ -1,41 +1,128 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use app\models\Propinsi;
-use app\models\Kota;
-
-use kartik\widgets\Select2;
-use kartik\widgets\DepDrop;
-use yii\helpers\Url;
-use kartik\datecontrol\DateControl;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Anggota */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+<?= Html::activeHiddenInput($model, 'id_anggota'); ?>
+<h3><label>Nama Anggota : <?=$model->nama_anggota; ?></label></h3>
+<h4><label>NIK : <?= $model->nik; ?></label></h4>
+<h4><label>Kecamatan : <?= $model->nama_kecamatan; ?></label></h4>
+<h4><label>Desa : <?= $model->nama_desa; ?></label></h4>
+<br>
+<br>
 <div class="anggota-form">
-<?= $form->field($model, 'status_kelompok_budidaya')->dropDownList([ 'PENGGARAP' => 'PENGGARAP', 'PEMILIK' => 'PEMILIK' ], ['prompt' => '']) ?>
 
-<?= $form->field($model, 'jenis_budidaya')->dropDownList([ 'JARING LAUT' =>'JARING LAUT','RUMPUT LAUT'=>'RUMPUT LAUT',	'TAMBAK'=>'TAMBAK','KOLAM'=>'KOLAM','KARAMBA'=>'KARAMBA','JARING APUNG TAWAR'=>'JARING APUNG TAWAR','JARING TANCAP TAWAR'=>'JARING TANCAP TAWAR','MINA PADI'=>'MINA PADI' ], ['prompt' => '']) ?>
-
-<?= $form->field($model, 'luas_lahan')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'status_sertifikasi_cbib_cpib')->dropDownList([ 'SUDAH' => 'SUDAH', 'BELUM' => 'BELUM' ], ['prompt' => '']) ?>
-
-<?= $form->field($model, 'nilai_sertifikasi')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'nomor_sertifikat')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'npwp')->textInput(['maxlength' => true]) ?>
-  <?= $form->field($model, 'jumlah_produksi_bulanan')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'kapasitas_produksi_bulanan')->textInput(['maxlength' => true]) ?>
-  
- 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div> 
+<div class="panel panel-primary" id="databantuan"  >
+<div class="panel-heading"> Data Tebar
 
 </div>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>Bulan</th>
+            <th>Tahun</th>
+            <th>Minggu</th>
+          <th>Komoditas</th>
+        <th>Qty Tebar</th>
+
+            <th><a id="btn-add2" href="#"><span class="glyphicon glyphicon-plus"></span></a></th>
+        </tr>
+    </thead>
+    <?= \mdm\widgets\TabularInput::widget([
+        'id' => 'detail-grid',
+        'allModels' => $model->detailAnggotaTebar,
+        'model' => \app\models\Detanggotatebar::className(),
+        'tag' => 'tbody',
+        'form' => $form,
+        'itemOptions' => ['tag' => 'tr'],
+        'itemView' => '_item_detail_tebar',
+        'clientOptions' => [
+            'btnAddSelector' => '#btn-add2',
+        ],
+    ]);
+    ?>
+</table>
+
+
+
+</div>
+<div class="panel panel-primary" id="databantuan"  >
+<div class="panel-heading"> Data Pakan
+
+</div>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>Bulan</th>
+            <th>Tahun</th>
+            <th>Minggu</th>
+                   <th>Komoditas</th>
+        <th>Qty Pakan</th>
+
+            <th><a id="btn-add3" href="#"><span class="glyphicon glyphicon-plus"></span></a></th>
+        </tr>
+    </thead>
+    <?= \mdm\widgets\TabularInput::widget([
+        'id' => 'detail-grid2',
+        'allModels' => $model->detailAnggotaPakan,
+        'model' => \app\models\Detanggotapakan::className(),
+        'tag' => 'tbody',
+        'form' => $form,
+        'itemOptions' => ['tag' => 'tr'],
+        'itemView' => '_item_detail_pakan',
+        'clientOptions' => [
+            'btnAddSelector' => '#btn-add3',
+        ],
+    ]);
+    ?>
+</table>
+
+
+
+</div>
+<div class="panel panel-primary" id="databantuan"  >
+<div class="panel-heading"> Data Produksi
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>Bulan</th>
+            <th>Tahun</th>
+            <th>Minggu</th>
+                   <th>Komoditas</th>
+        <th>Qty Produksi</th>
+
+            <th><a id="btn-add4" href="#"><span class="glyphicon glyphicon-plus"></span></a></th>
+        </tr>
+    </thead>
+    <?= \mdm\widgets\TabularInput::widget([
+        'id' => 'detail-grid4',
+        'allModels' => $model->detailAnggotaProduksi,
+        'model' => \app\models\Detanggotaproduksi::className(),
+        'tag' => 'tbody',
+        'form' => $form,
+        'itemOptions' => ['tag' => 'tr'],
+        'itemView' => '_item_detail_produksi',
+        'clientOptions' => [
+            'btnAddSelector' => '#btn-add4',
+        ],
+    ]);
+    ?>
+</table>
+
+
+
+</div>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']); ?>
+    </div>

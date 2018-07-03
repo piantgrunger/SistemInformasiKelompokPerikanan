@@ -164,10 +164,28 @@ class BudidayaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->old_foto_anggota = $model->foto_anggota;
 
-        if ($model->load(Yii::$app->request->post()) && $model->upload() && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_anggota]);
+        if ($model->load(Yii::$app->request->post())) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $model->detailAnggotaPakan = Yii::$app->request->post('Detanggotapakan', []);
+                $model->detailAnggotaProduksi = Yii::$app->request->post('Detanggotaproduksi', []);
+                $model->detailAnggotaTebar = Yii::$app->request->post('Detanggotatebar', []);
+
+                if ($model->save()) {
+                    $transaction->commit();
+
+                    return $this->redirect(['view', 'id' => $model->id_anggota]);
+                }
+                $transaction->rollBack();
+            } catch (\Exception $ecx) {
+                $transaction->rollBack();
+                throw $ecx;
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         } else {
             return $this->render('update', [
                 'model' => $model,
