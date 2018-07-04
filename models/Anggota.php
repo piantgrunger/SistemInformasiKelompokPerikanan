@@ -271,6 +271,21 @@ class Anggota extends \yii\db\ActiveRecord
         return $this->loadRelated('detailAnggotaProduksi', $value);
     }
 
+    public function getTotal_tebar()
+    {
+        return is_null($this->detailAnggotaTebar) ? 0 : $this->hasMany(Detanggotatebar::className(), ['id_anggota' => 'id_anggota'])->sum('qty');
+    }
+
+    public function getTotal_pakan()
+    {
+        return is_null($this->detailAnggotaPakan) ? 0 : $this->hasMany(Detanggotapakan::className(), ['id_anggota' => 'id_anggota'])->sum('qty');
+    }
+
+    public function getTotal_produksi()
+    {
+        return is_null($this->detailAnggotaProduksi) ? 0 : $this->hasMany(Detanggotaproduksi::className(), ['id_anggota' => 'id_anggota'])->sum('qty');
+    }
+
     public function getNama_kelompok()
     {
         return ($this->kelompok === null) ? '' : $this->kelompok->nama_kelompok;

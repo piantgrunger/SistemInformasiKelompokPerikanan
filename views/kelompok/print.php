@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use hscstudio\mimin\components\Mimin;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Kelompok */
@@ -11,7 +10,7 @@ $this->title = 'Data Kelompok';
 ?>
 <div class="kelompok-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title); ?></h1>
 
 
 
@@ -34,9 +33,8 @@ $this->title = 'Data Kelompok';
             'nama_bank',
             'cabang',
             'nama_pemilik_rekening',
-            
         ],
-    ]) ?>
+    ]); ?>
     <div class="panel panel-primary">
 <div class="panel-heading"> Data Anggota - Kelompok
 
@@ -50,6 +48,15 @@ $this->title = 'Data Kelompok';
             <th>Posisi</th>
             <th>Jenis Kelamin</th>
             <th>Umur</th>
+                <?php if ($model->jenis_anggota === 'BUDIDAYA') {
+        ?>
+            <th>Total Tebar</th>
+            <th>Total Pakan</th>
+            <th>Total Produksi</th>
+
+            <?php
+    }
+        ?>
 
         </tr>
     </thead>
@@ -60,7 +67,6 @@ $this->title = 'Data Kelompok';
         'tag' => 'tbody',
         'itemOptions' => ['tag' => 'tr'],
         'itemView' => '_item_detail_kelompok_view',
-
     ]);
     ?>
 </table>
@@ -68,7 +74,7 @@ $this->title = 'Data Kelompok';
 
 </div>
 
-<?php if ($model->status_bantuan == "Sudah") {
+<?php if ($model->status_bantuan == 'Sudah') {
         ?>
 
     <div class="panel panel-primary">
@@ -92,7 +98,6 @@ $this->title = 'Data Kelompok';
         'tag' => 'tbody',
         'itemOptions' => ['tag' => 'tr'],
         'itemView' => '_item_detail_kelompok_view_bantuan',
-
     ]); ?>
 </table>
 

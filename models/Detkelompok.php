@@ -3,32 +3,29 @@
 namespace app\models;
 
 use Yii;
-
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 
-
 /**
  * This is the model class for table "tb_d_kelompok".
  *
- * @property int $id_kelompok
- * @property int $id_d_kelompok
- * @property int $id_anggota
- * @property string $posisi
- * @property string $created_at
- * @property string $updated_at
- *
- * @property TbMAnggota $anggota
+ * @property int         $id_kelompok
+ * @property int         $id_d_kelompok
+ * @property int         $id_anggota
+ * @property string      $posisi
+ * @property string      $created_at
+ * @property string      $updated_at
+ * @property TbMAnggota  $anggota
  * @property TbMKelompok $kelompok
  */
 class Detkelompok extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-
-    public function __toString() {
+    public function __toString()
+    {
         return $this->id_anggota;
     }
 
@@ -46,30 +43,31 @@ class Detkelompok extends \yii\db\ActiveRecord
             ],
         ];
     }
+
     public static function tableName()
     {
         return 'tb_d_kelompok';
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [[ 'id_anggota'], 'required'],
+            [['id_anggota'], 'required'],
             [['id_kelompok', 'id_anggota'], 'integer'],
             [['posisi'], 'string'],
-            [['id_kelompok','created_at', 'updated_at'], 'safe'],
+            [['id_kelompok', 'created_at', 'updated_at'], 'safe'],
             [['id_anggota'], 'cekAnggota'],
-               
+
             [['id_anggota'], 'exist', 'skipOnError' => true, 'targetClass' => Anggota::className(), 'targetAttribute' => ['id_anggota' => 'id_anggota']],
             [['id_kelompok'], 'exist', 'skipOnError' => true, 'targetClass' => Kelompok::className(), 'targetAttribute' => ['id_kelompok' => 'id_kelompok']],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -90,19 +88,21 @@ class Detkelompok extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Anggota::className(), ['id_anggota' => 'id_anggota']);
     }
+
     public function getNama_anggota()
     {
-        return is_null($this->anggota)?"":$this->anggota->nama_anggota;
-    }
-    public function getJenis_kelamin()
-    {
-        return is_null($this->anggota)?"":$this->anggota->jenis_kelamin;
-    }
-    public function getUmur()
-    {
-        return is_null($this->anggota)?"":$this->anggota->umur;
+        return is_null($this->anggota) ? '' : $this->anggota->nama_anggota;
     }
 
+    public function getJenis_kelamin()
+    {
+        return is_null($this->anggota) ? '' : $this->anggota->jenis_kelamin;
+    }
+
+    public function getUmur()
+    {
+        return is_null($this->anggota) ? '' : $this->anggota->umur;
+    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -111,22 +111,40 @@ class Detkelompok extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Kelompok::className(), ['id_kelompok' => 'id_kelompok']);
     }
+
     public function getNama_kelompok()
     {
-        return is_null($this->kelompok)?"":$this->kelompok->nama_kelompok;
-    }
-    public function cekAnggota($attribute, $params)
-    {
-      $kelompok = Detkelompok::find()->where('id_anggota='.$this->id_anggota)
-                      ->andWhere(["<>","id_kelompok",$this->id_kelompok])->one();
-      if(!is_null($kelompok))
-      {
-           $this->addError($attribute,$this->nama_anggota.' Sudah Menjadi Anggota Kelompok '.$kelompok->nama_kelompok);
-          return false;          
-      
-      }  
-   
-  
+        return is_null($this->kelompok) ? '' : $this->kelompok->nama_kelompok;
     }
 
+    public function getJenis_anggota()
+    {
+        return is_null($this->kelompok) ? '' : $this->kelompok->jenis_anggota;
+    }
+
+    public function getTotal_tebar()
+    {
+        return is_null($this->anggota) ? 0 : $this->anggota->total_tebar;
+    }
+
+    public function getTotal_pakan()
+    {
+        return is_null($this->anggota) ? 0 : $this->anggota->total_pakan;
+    }
+
+    public function getTotal_produksi()
+    {
+        return is_null($this->anggota) ? 0 : $this->anggota->total_produksi;
+    }
+
+    public function cekAnggota($attribute, $params)
+    {
+        $kelompok = Detkelompok::find()->where('id_anggota='.$this->id_anggota)
+                      ->andWhere(['<>', 'id_kelompok', $this->id_kelompok])->one();
+        if (!is_null($kelompok)) {
+            $this->addError($attribute, $this->nama_anggota.' Sudah Menjadi Anggota Kelompok '.$kelompok->nama_kelompok);
+
+            return false;
+        }
+    }
 }

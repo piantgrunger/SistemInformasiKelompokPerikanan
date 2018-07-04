@@ -13,23 +13,26 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kelompok-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title); ?></h1>
 
     <p>
-             <?php if ((Mimin::checkRoute($this->context->id . "/update"))) {
-    ?>        <?= Html::a(Yii::t('app', 'Ubah'), ['update', 'id' => $model->id_kelompok], ['class' => 'btn btn-primary']) ?>
+             <?php if ((Mimin::checkRoute($this->context->id.'/update'))) {
+    ?>        <?= Html::a(Yii::t('app', 'Ubah'), ['update', 'id' => $model->id_kelompok], ['class' => 'btn btn-primary']); ?>
         <?php
 }
-    if ((Mimin::checkRoute($this->context->id . "/delete"))) {
+    if ((Mimin::checkRoute($this->context->id.'/delete'))) {
         ?>        <?= Html::a(Yii::t('app', 'Hapus'), ['delete', 'id' => $model->id_kelompok], [
                                                                             'class' => 'btn btn-danger',
                                                                             'data' => [
                                                                                 'confirm' => Yii::t('app', 'Apakah Anda yakin ingin menghapus item ini??'),
                                                                                 'method' => 'post',
                                                                             ],
-                                                                        ]) ?>
-      <?php } if ((Mimin::checkRoute($this->context->id."/print"))){ ?>        <?= Html::a(Yii::t('app', 'Cetak'), ['print', 'id' => $model->id_kelompok], ['class' => 'btn btn-success']) ?>
-    <?php } ?>    </p>
+                                                                        ]); ?>
+      <?php
+    } if ((Mimin::checkRoute($this->context->id.'/print'))) {
+        ?>        <?= Html::a(Yii::t('app', 'Cetak'), ['print', 'id' => $model->id_kelompok], ['class' => 'btn btn-success']); ?>
+    <?php
+    } ?>    </p>
     </p>
 
     <?= DetailView::widget([
@@ -54,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at',
             'updated_at',
         ],
-    ]) ?>
+    ]); ?>
     <div class="panel panel-primary">
 <div class="panel-heading"> Data Anggota - Kelompok
 
@@ -68,6 +71,15 @@ $this->params['breadcrumbs'][] = $this->title;
             <th>Posisi</th>
             <th>Jenis Kelamin</th>
             <th>Umur</th>
+            <?php if ($model->jenis_anggota === 'BUDIDAYA') {
+        ?>
+            <th>Total Tebar</th>
+            <th>Total Pakan</th>
+            <th>Total Produksi</th>
+
+            <?php
+    }
+            ?>
 
         </tr>
     </thead>
@@ -78,7 +90,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'tag' => 'tbody',
         'itemOptions' => ['tag' => 'tr'],
         'itemView' => '_item_detail_kelompok_view',
-
     ]);
     ?>
 </table>
@@ -86,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-<?php if ($model->status_bantuan == "Sudah") {
+<?php if ($model->status_bantuan == 'Sudah') {
         ?>
 
     <div class="panel panel-primary">
@@ -110,7 +121,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'tag' => 'tbody',
         'itemOptions' => ['tag' => 'tr'],
         'itemView' => '_item_detail_kelompok_view_bantuan',
-
     ]); ?>
 </table>
 
