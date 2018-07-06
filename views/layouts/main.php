@@ -27,6 +27,7 @@ $menuItems =
                         ['label' => 'Anggota', 'icon' => 'fa fa-file-code-o', 'url' => ['anggota/index'], 'visible' => !Yii::$app->user->isGuest],
                         ['label' => 'Kelompok', 'icon' => 'fa fa-file-code-o', 'url' => ['kelompok/index'], 'visible' => !Yii::$app->user->isGuest],
                         ['label' => 'Budidaya', 'icon' => 'fa fa-file-code-o', 'url' => ['budidaya/index'], 'visible' => !Yii::$app->user->isGuest],
+                        ['label' => 'Laporan', 'icon' => 'fa fa-file-code-o', 'url' => ['laporan/index']],
                 ];
 
  if (!Yii::$app->user->isGuest) {
