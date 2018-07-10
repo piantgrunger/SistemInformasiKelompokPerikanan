@@ -73,7 +73,7 @@ array(
             $dataKomoditas = Yii::$app->db->createCommand(
                 " select  komoditas,sum(qty) as qty_produksi  from tb_d_anggota_produksi d
                        where tahun_produksi = $model->tahun
-
+                        group by komoditas
                    "
             )->queryAll();
 
