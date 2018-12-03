@@ -5,9 +5,8 @@ use kartik\select2\Select2;
 use miloschuman\highcharts\Highcharts;
 use yii\web\JsExpression;
 
-
 $current_year = date('Y');
-$range = range($current_year-5, $current_year+5);
+$range = range($current_year - 5, $current_year + 5);
 $years = array_combine($range, $range);
 
 $form = ActiveForm::begin();
@@ -37,6 +36,10 @@ $form = ActiveForm::begin();
 
 
 echo Highcharts::widget([
+    'scripts' => [
+        'modules/exporting',
+        'themes/grid-light',
+    ],
     'options' => [
         'title' => ['text' => 'Data Budidaya Kabupaten Tuban'],
         'xAxis' => [
@@ -45,9 +48,7 @@ echo Highcharts::widget([
         'yAxis' => [
             'title' => ['text' => 'Jumlah '],
         ],
-        'series' => 
-           [
-              
+        'series' => [
                  [
                     'type' => 'column',
                     'name' => 'Tebar',
@@ -70,7 +71,6 @@ echo Highcharts::widget([
     ],
 ]);
 
-
 echo Highcharts::widget([
     'scripts' => [
         'modules/exporting',
@@ -78,64 +78,53 @@ echo Highcharts::widget([
     ],
     'options' => [
         'title' => [
-            'text' => 'Combination chart',
-        ],
-        'xAxis' => [
-            'categories' => ['Apples', 'Oranges', 'Pears', 'Bananas', 'Plums'],
-        ],
-        'labels' => [
+            'text' => 'Data Budidaya Kabupaten Tuban',
+             ],
+             'labels' => [
             'items' => [
                 [
-                    'html' => 'Total fruit consumption',
+                    'html' => 'Total Produksi Per Kecamatan',
                     'style' => [
-                        'left' => '50px',
-                        'top' => '18px',
+                        'left' => '270px',
+                        'top' => '320px',
                         'color' => new JsExpression('(Highcharts.theme && Highcharts.theme.textColor) || "black"'),
+                    ],
+                ],
+                [
+                    'html' => 'Total Produksi Per Komoditi',
+                    'style' => [
+                        'left' => '670px',
+                        'top' => '320px',
+                 'color' => new JsExpression('(Highcharts.theme && Highcharts.theme.textColor) || "black"'),
                     ],
                 ],
             ],
         ],
         'series' => [
             [
-                'type' => 'column',
-                'name' => 'Jane',
-                'data' => [3, 2, 1, 3, 4],
-            ],
-            [
-                'type' => 'column',
-                'name' => 'John',
-                'data' => [2, 3, 5, 7, 6],
-            ],
-            [
-                'type' => 'column',
-                'name' => 'Joe',
-                'data' => [4, 3, 3, 9, 0],
-            ],
-            [
-                'type' => 'spline',
-                'name' => 'Average',
-                'data' => [3, 2.67, 3, 6.33, 3.33],
-                'marker' => [
-                    'lineWidth' => 2,
-                    'lineColor' => new JsExpression('Highcharts.getOptions().colors[3]'),
-                    'fillColor' => 'white',
+                'type' => 'pie',
+                'name' => 'Data Per Kecamatan',
+                'data' => $series,
+                'center' => [310, 150],
+                'size' => 300,
+                'showInLegend' => false,
+                'dataLabels' => [
+                    'enabled' => false,
                 ],
             ],
             [
                 'type' => 'pie',
-                'name' => 'Total consumption',
-                'data' => [
-                  $series
-               ],
-                'center' => [100, 80],
-                'size' => 100,
+                'name' => 'Data Per Komoditas',
+                'data' => $series2,
+                'center' => [710, 150],
+                'size' => 300,
                 'showInLegend' => false,
                 'dataLabels' => [
                     'enabled' => false,
                 ],
             ],
         ],
-    ]
+    ],
 ]);
 ?>
 

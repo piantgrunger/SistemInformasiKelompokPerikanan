@@ -68,7 +68,9 @@ if( $model->jenis_anggota == 'BUDIDAYA')
     $attributes1=[
     'status_kelompok_budidaya',
     'jenis_budidaya',
-    'luas_lahan:decimal',
+    'jenis_ikan',
+      'luas_lahan:decimal',
+      
     'status_sertifikasi_cbib_cpib',
     'nilai_sertifikasi:decimal',
     'nomor_sertifikat',

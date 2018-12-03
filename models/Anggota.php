@@ -98,7 +98,7 @@ class Anggota extends \yii\db\ActiveRecord
             'pendidikan', 'status_kelompok_usaha', 'status_usaha',
              'perlindungan_asuransi', 'jenis_usaha', 'sarana_prasarana',
              'daerah_pemasaran', 'status_kelompok_budidaya', 'jenis_budidaya', 'nomor_sertifikat', 'npwp',
-             'no_siup', 'no_situ', 'no_tdp', 'no_ho', 'no_izin_lainnya', 'no_skp', 'no_haccp', 'no_pirt', 'no_sni', 'no_sertifikat_lainnya', 'lokasi_lahan', ], 'string'],
+             'no_siup', 'no_situ', 'no_tdp', 'no_ho', 'no_izin_lainnya', 'no_skp', 'no_haccp', 'no_pirt', 'no_sni', 'no_sertifikat_lainnya', 'lokasi_lahan','jenis_ikan' ], 'string'],
             [['tgl_lahir', 'created_at', 'updated_at'], 'safe'],
             [['id_propinsi', 'id_kota', 'id_kecamatan', 'id_kelurahan', 'jml_anggota_keluarga', 'stat_siup', 'stat_situ', 'stat_tdp', 'stat_ho', 'stat_izin_lainnya', 'stat_skp', 'stat_haccp', 'stat_pirt', 'stat_sni', 'stat_sertifikat_lainnya', 'tahun_berdiri', 'jumlah_tenaga_kerja'], 'integer'],
             [['jumlah_bahan_baku_bulanan', 'jumlah_produksi_bulanan',

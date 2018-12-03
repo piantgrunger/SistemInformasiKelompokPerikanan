@@ -32,6 +32,7 @@ use kartik\datecontrol\DateControl;
   <?= $form->field($model, 'jumlah_produksi_bulanan')->textInput(['maxlength' => true]) ?>
 
 <?= $form->field($model, 'kapasitas_produksi_bulanan')->textInput(['maxlength' => true]) ?>
+  <?= $form->field($model, 'jenis_ikan')->textInput() ?>
   
  
     <div class="form-group">
