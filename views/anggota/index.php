@@ -5,21 +5,24 @@ use hscstudio\mimin\components\Mimin;
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
- use kartik\export\ExportMenu;
 use yii\helpers\ArrayHelper;
 use app\models\Kecamatan;
 use app\models\Kelurahan;
 
-$gridColumns=[['class' => 'kartik\grid\SerialColumn'],
-
+$gridColumns = [['class' => 'kartik\grid\SerialColumn'],
+[
+    'attribute' => 'NIK',
+    'value' => function ($model) {
+        return ' '.$model->nik.' ';
+    },
+    ],
 
 'nama_anggota',
-            'nik',
             [
-            'attribute'=>'jenis_anggota',
-            'value'=>'jenis_anggota',
+            'attribute' => 'jenis_anggota',
+            'value' => 'jenis_anggota',
 
-            'filter'=>['PENGOLAHAN'=>'PENGOLAHAN','BUDIDAYA'=>'BUDIDAYA','GARAM'=>'GARAM']
+            'filter' => ['PENGOLAHAN' => 'PENGOLAHAN', 'BUDIDAYA' => 'BUDIDAYA', 'GARAM' => 'GARAM'],
             ],
             // 'tgl_lahir',
             // 'golongan_darah',
@@ -27,22 +30,24 @@ $gridColumns=[['class' => 'kartik\grid\SerialColumn'],
         'attribute' => 'jenis_kelamin',
         'value' => 'jenis_kelamin',
 
-        'filter' => ['Laki-Laki' => 'Laki-Laki', 'Perempuan' => 'Perempuan']
+        'filter' => ['Laki-Laki' => 'Laki-Laki', 'Perempuan' => 'Perempuan'],
     ],
 
    'umur',
             [
-                'attribute'=>'nama_kecamatan',
-                'value'=>'nama_kecamatan',
+                'attribute' => 'nama_kecamatan',
+                'value' => 'nama_kecamatan',
 
-                'filter'=>ArrayHelper::map(Kecamatan::find()->where('id_kota=3523')->asArray()->all(),  'nama_kecamatan','nama_kecamatan')
+                'filter' => ArrayHelper::map(Kecamatan::find()->where('id_kota=3523')->asArray()->all(), 'nama_kecamatan', 'nama_kecamatan'),
             ],
             [
-                'attribute'=>'nama_desa',
-                'value'=>'nama_desa',
-
+                'attribute' => 'nama_desa',
+                'value' => 'nama_desa',
             ],
             'nama_kelompok',
+            'kapasitas_produksi_bulanan',
+            'jumlah_produksi_bulanan',
+
             // 'id_propinsi',
             // 'id_kota',
          //    'nama_kecamatan',
@@ -55,17 +60,15 @@ $gridColumns=[['class' => 'kartik\grid\SerialColumn'],
             // 'updated_at',
 
          ['class' => 'kartik\grid\ActionColumn',  'template' => Mimin::filterActionColumn([
-              'update','delete','view'],$this->context->route) ." {print} ",
+              'update', 'delete', 'view', ], $this->context->route).' {print} ',
               'buttons' => [
-
               'print' => function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-print"></span>',
-                ['print','id'=>$model->id_anggota], [
+                  return Html::a('<span class="glyphicon glyphicon-print"></span>',
+                ['print', 'id' => $model->id_anggota], [
                            'title' => Yii::t('app', 'Cetak'),
-                           'target' => '_blank', 'class' => 'linksWithTarget', 'data-pjax' => 0]);
-              },]
+                           'target' => '_blank', 'class' => 'linksWithTarget', 'data-pjax' => 0, ]);
+              }, ],
        ],    ];
-
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\AnggotaSearch */
@@ -76,21 +79,27 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="anggota-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title); ?></h1>
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);?>
    <div class="row">
-   <div class="col-md-4 text-center">    <p> <?php if ((Mimin::checkRoute($this->context->id."/pengolahanbaru"))){ ?>
-           <?=  Html::a(Yii::t('app', 'Anggota Pengolahan Baru'), ['pengolahanbaru'], ['class' => 'btn btn-success']) ?>
-    <?php } ?>    </p>
+   <div class="col-md-4 text-center">    <p> <?php if ((Mimin::checkRoute($this->context->id.'/pengolahanbaru'))) {
+    ?>
+           <?=  Html::a(Yii::t('app', 'Anggota Pengolahan Baru'), ['pengolahanbaru'], ['class' => 'btn btn-success']); ?>
+    <?php
+} ?>    </p>
     </div><div class="col-md-4 text-center">
-    <p> <?php if ((Mimin::checkRoute($this->context->id."/budidayabaru"))){ ?>
-           <?=  Html::a(Yii::t('app', 'Anggota Budidaya Baru'), ['budidayabaru'], ['class' => 'btn btn-success']) ?>
-    <?php } ?>    </p>
+    <p> <?php if ((Mimin::checkRoute($this->context->id.'/budidayabaru'))) {
+        ?>
+           <?=  Html::a(Yii::t('app', 'Anggota Budidaya Baru'), ['budidayabaru'], ['class' => 'btn btn-success']); ?>
+    <?php
+    } ?>    </p>
     </div><div class="col-md-4 text-center">
-    <p> <?php if ((Mimin::checkRoute($this->context->id."/budidayabaru"))){ ?>
-           <?=  Html::a(Yii::t('app', 'Anggota Garam Baru'), ['garambaru'], ['class' => 'btn btn-success']) ?>
-    <?php } ?>    </p>
+    <p> <?php if ((Mimin::checkRoute($this->context->id.'/budidayabaru'))) {
+        ?>
+           <?=  Html::a(Yii::t('app', 'Anggota Garam Baru'), ['garambaru'], ['class' => 'btn btn-success']); ?>
+    <?php
+    } ?>    </p>
     </div>
     </div>
     <?= GridView::widget([
@@ -98,8 +107,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
         'tableOptions' => ['class' => 'table  table-bordered table-hover'],
-        'striped'=>false,
-        'containerOptions'=>[true],
+        'striped' => false,
+        'containerOptions' => [true],
         'pjax' => true,
         'bordered' => true,
         'striped' => false,
@@ -108,11 +117,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'hover' => true,
          'showPageSummary' => true,
         'panel' => [
-            'type' => GridView::TYPE_PRIMARY
-
+            'type' => GridView::TYPE_PRIMARY,
         ],
-         'resizableColumns'=>true,
-
+         'resizableColumns' => true,
     ]); ?>
     <?php Pjax::end(); ?>
 </div>

@@ -5,20 +5,18 @@ use League\Csv\Reader;
 
 class m170705_085255_create_tb_m_kelurahan extends Migration
 {
-     const TABLE_NAME = 'tb_m_kelurahan';
+    const TABLE_NAME = 'tb_m_kelurahan';
+
     public function up()
     {
-  $this->createTable(self::TABLE_NAME, [
-
+        $this->dropTable(self::TABLE_NAME);
+        $this->createTable(self::TABLE_NAME, [
             'id_kelurahan' => $this->bigInteger()->notNull(),
        'id_kecamatan' => $this->integer()->notNull(),
             'nama_kelurahan' => $this->string(50)->notNull(),
-
-
-
         ]);
-        $this->addPrimaryKey('pk_tb_kelurahan', $this::TABLE_NAME ,'id_kelurahan');
-    // creates index for column `id_kecamatan`
+        $this->addPrimaryKey('pk_tb_kelurahan', $this::TABLE_NAME, 'id_kelurahan');
+        // creates index for column `id_kecamatan`
         $this->createIndex(
         'idx-kelurahan-id_kecamatan',
         'tb_m_kelurahan',
@@ -49,10 +47,8 @@ class m170705_085255_create_tb_m_kelurahan extends Migration
                   $row[2],
               ]
         );
-
         }
-         $this->batchInsert($this::TABLE_NAME,['id_kelurahan','id_kecamatan','nama_kelurahan'] , $Rows);
-
+        //   $this->batchInsert($this::TABLE_NAME,['id_kelurahan','id_kecamatan','nama_kelurahan'] , $Rows);
     }
 
     public function down()
