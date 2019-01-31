@@ -12,6 +12,7 @@ use app\models\Kelurahan;
 $gridColumns = [['class' => 'kartik\grid\SerialColumn'],
 [
     'attribute' => 'NIK',
+    'format' => 'text',
     'value' => function ($model) {
         return ' '.$model->nik.' ';
     },
