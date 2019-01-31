@@ -116,8 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'condensed' => false,
         'responsive' => true,
         'hover' => true,
-        'hashExportConfig' => false,
-         'showPageSummary' => true,
+          'showPageSummary' => true,
         'panel' => [
             'type' => GridView::TYPE_PRIMARY,
         ],
